@@ -1,0 +1,96 @@
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[auth]
+enabled = true
+port = 54322
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["https://takayamalog.com"]
+jwt_expiry = 3600
+refresh_token_rotation_enabled = true
+refresh_token_reuse_interval = 10
+enable_signup = false
+enable_email_confirmations = false
+enable_phone_confirmations = false
+
+[auth.email]
+enable_signup = false
+double_confirm_changes = true
+enable_confirmations = false
+template = {
+  confirm_signup = "confirm_signup.html",
+  invite = "invite.html",
+  magic_link = "magic_link.html",
+  recovery = "recovery.html",
+  email_change = "email_change.html"
+}
+
+[auth.sms]
+enable_signup = false
+enable_confirmations = false
+template = "sms_otp.html"
+
+[auth.external.google]
+enabled = false
+client_id = ""
+secret = ""
+redirect_uri = ""
+
+[auth.external.github]
+enabled = false
+client_id = ""
+secret = ""
+redirect_uri = ""
+
+[db]
+port = 54322
+major_version = 15
+
+[db.pooler]
+enabled = false
+port = 54329
+pool_mode = "transaction"
+default_pool_size = 20
+max_client_conn = 100
+
+[realtime]
+enabled = true
+port = 54323
+ip_version = "ipv4"
+
+[storage]
+enabled = true
+port = 54324
+file_size_limit = "50MiB"
+image_transformation = {
+  enabled = true
+}
+
+[edge_functions]
+enabled = true
+port = 54325
+ip_version = "ipv4"
+
+[analytics]
+enabled = false
+port = 54326
+vector_port = 54327
+backend = "postgres"
+
+[inbucket]
+enabled = true
+port = 54328
+smtp_port = 54329
+pop3_port = 54330
+
+[studio]
+enabled = true
+port = 54323
+api_url = "http://localhost:54321"
+
+[functions]
+verify_jwt = false
