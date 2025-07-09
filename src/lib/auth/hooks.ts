@@ -11,20 +11,23 @@ export function useAuth() {
   const [loading, setLoading] = useState(true)
   const supabase = createClient()
 
-  const fetchProfile = useCallback(async (userId: string): Promise<void> => {
-    try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single()
+  const fetchProfile = useCallback(
+    async (userId: string): Promise<void> => {
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', userId)
+          .single()
 
-      if (error) throw error
-      setProfile(data)
-    } catch {
-      setProfile(null)
-    }
-  }, [supabase])
+        if (error) throw error
+        setProfile(data)
+      } catch {
+        setProfile(null)
+      }
+    },
+    [supabase]
+  )
 
   useEffect(() => {
     // Get initial session

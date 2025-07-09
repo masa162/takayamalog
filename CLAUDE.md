@@ -1,6 +1,7 @@
 # 高山まさあきの夜遊び研究所 - 開発環境設定
 
 ## プロジェクト概要
+
 - **プロジェクト名**: 高山まさあきの夜遊び研究所
 - **ドメイン**: takayamalog.com
 - **GitHubリポジトリ**: https://github.com/masa162/takayamalog
@@ -8,6 +9,7 @@
 - **主要コンテンツ**: 風俗体験談、FANZA動画レビュー
 
 ## 技術スタック
+
 - **Frontend**: Next.js 15.3.5 (App Router)
 - **Backend**: Supabase (PostgreSQL + Auth + Storage)
 - **Hosting**: Vercel
@@ -18,6 +20,7 @@
 ## 完了した作業（Phase 1: 基本環境構築）
 
 ### 1.1 開発環境セットアップ
+
 - ✅ Next.js 14プロジェクトの初期化
 - ✅ TypeScript設定
 - ✅ ESLint・Prettier設定
@@ -25,6 +28,7 @@
 - ✅ GitHub Actionsの設定
 
 ### セットアップ内容
+
 1. **Next.js 15.3.5プロジェクト作成**
    - App Router対応
    - TypeScript対応
@@ -34,7 +38,7 @@
 2. **TypeScript設定**
    - ES2022ターゲット
    - strict モード有効
-   - パス設定 (@/*)
+   - パス設定 (@/\*)
 
 3. **ESLint・Prettier設定**
    - Next.js推奨設定
@@ -55,6 +59,7 @@
 ## 開発環境セットアップ
 
 ### 必要なツール
+
 ```bash
 # Node.js 20以上
 node --version
@@ -67,6 +72,7 @@ git --version
 ```
 
 ### プロジェクト起動
+
 ```bash
 # リポジトリクローン
 git clone https://github.com/masa162/takayamalog.git
@@ -84,6 +90,7 @@ npm run dev
 ```
 
 ## 環境変数設定
+
 ```env
 # Supabase
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
@@ -102,6 +109,7 @@ NEXT_PUBLIC_AGE_VERIFICATION_ENABLED=true
 ```
 
 ## プロジェクト構造
+
 ```
 src/
 ├── app/
@@ -131,6 +139,7 @@ src/
 ```
 
 ## 重要なコマンド
+
 ```bash
 # 開発サーバー起動
 npm run dev
@@ -158,13 +167,16 @@ npm run test
 ```
 
 ## 完了した作業（Phase 1.2）
+
 ### 1.2 Supabaseセットアップ
+
 - ✅ Supabaseプロジェクト作成
 - ✅ データベース設計の実装
 - ✅ Row Level Security (RLS) 設定
 - ✅ 認証システムの基本設定
 
 ### セットアップ詳細
+
 1. **Supabaseクライアント設定**
    - @supabase/ssr パッケージ導入
    - クライアントサイド・サーバーサイド対応
@@ -186,6 +198,7 @@ npm run test
    - 認証フック・コンテキスト
 
 ### データベーステーブル
+
 - **articles**: 記事情報
 - **categories**: カテゴリ情報
 - **establishments**: 風俗店舗情報
@@ -194,7 +207,9 @@ npm run test
 - **affiliate_clicks**: アフィリエイトクリック統計
 
 ## 次の作業（Phase 1.3）
+
 ### 1.3 デプロイメント準備
+
 - [ ] Vercelアカウント設定
 - [ ] NamecheapドメインのVercel連携
 - [ ] Supabaseプロジェクトの本番環境作成
@@ -202,18 +217,22 @@ npm run test
 - [ ] 本番環境へのデプロイ
 
 ## 品質保証
+
 ### パフォーマンス目標
+
 - **LCP**: 2.5秒以内
 - **FID**: 100ms以内
 - **CLS**: 0.1以内
 
 ### 現在のビルド状況
+
 - ✅ コンパイル成功
 - ✅ 型チェック完了
 - ✅ 静的生成対応
 - ⚠️ ESLint警告2件（関数の戻り値型）
 
 ## 備考
+
 - このプロジェクトは成人向けコンテンツを含みます
 - 法的要件に従って適切な年齢確認を実装予定
 - アフィリエイトプログラムを使用した収益化予定

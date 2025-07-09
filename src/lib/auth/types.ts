@@ -24,7 +24,10 @@ export interface AuthContextType {
   user: User | null
   profile: Profile | null
   loading: boolean
-  signIn: (email: string, password: string) => Promise<{ user: User | null; session: Session | null }>
+  signIn: (
+    email: string,
+    password: string
+  ) => Promise<{ user: User | null; session: Session | null }>
   signOut: () => Promise<void>
   isAdmin: boolean
 }

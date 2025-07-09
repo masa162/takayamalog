@@ -24,7 +24,7 @@ export default function AgeVerification() {
         <h1 className="text-2xl font-bold text-center mb-6 text-gray-900">
           年齢確認
         </h1>
-        
+
         <div className="text-center mb-6">
           <p className="text-gray-700 mb-4">
             このサイトはアダルトコンテンツを含みます。
@@ -53,7 +53,9 @@ export default function AgeVerification() {
         <div className="mt-6 text-xs text-gray-500 text-center">
           <p>
             このサイトに入ることで、あなたが18歳以上であることを確認し、
-            <a href="/terms" className="text-blue-600 hover:underline">利用規約</a>
+            <a href="/terms" className="text-blue-600 hover:underline">
+              利用規約
+            </a>
             に同意したものとみなされます。
           </p>
         </div>

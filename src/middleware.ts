@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
 
   // セキュリティヘッダーの設定
   const response = NextResponse.next()
-  
+
   response.headers.set('X-Content-Type-Options', 'nosniff')
   response.headers.set('X-Frame-Options', 'DENY')
   response.headers.set('X-XSS-Protection', '1; mode=block')
@@ -61,10 +61,10 @@ export async function middleware(request: NextRequest) {
   }
 
   // レート制限（簡易版）
-  // const ip = request.headers.get('x-forwarded-for') || 
-  //            request.headers.get('x-real-ip') || 
+  // const ip = request.headers.get('x-forwarded-for') ||
+  //            request.headers.get('x-real-ip') ||
   //            'unknown'
-  
+
   // APIエンドポイントの保護
   if (pathname.startsWith('/api/admin') || pathname.startsWith('/api/auth')) {
     const authHeader = request.headers.get('authorization')

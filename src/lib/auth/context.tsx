@@ -6,7 +6,11 @@ import { AuthContextType } from './types'
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-export function AuthProvider({ children }: { children: ReactNode }): React.JSX.Element {
+export function AuthProvider({
+  children,
+}: {
+  children: ReactNode
+}): React.JSX.Element {
   const auth = useAuth()
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
