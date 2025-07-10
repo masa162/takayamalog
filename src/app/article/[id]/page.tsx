@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { CalendarIcon, ClockIcon, EyeIcon, TagIcon } from '@heroicons/react/24/outline'
-import { getArticleBySlug, getRelatedArticles, articleExists } from '@/lib/articles'
+import { getArticleBySlug, getRelatedArticles, articleExists } from '@/lib/articles-server'
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -11,18 +11,18 @@ export default async function ArticlePage({ params }: PageProps): Promise<React.
   const { id } = await params
   
   // 記事の存在確認
-  if (!articleExists(id)) {
+  if (!(await articleExists(id))) {
     notFound()
   }
   
-  const article = getArticleBySlug(id)
+  const article = await getArticleBySlug(id)
   
   if (!article) {
     notFound()
   }
   
   // 関連記事を取得
-  const relatedArticles = getRelatedArticles(article, 3)
+  const relatedArticles = await getRelatedArticles(article, 3)
 
   const getCategoryColor = (category: string): string => {
     switch (category) {
@@ -71,51 +71,84 @@ export default async function ArticlePage({ params }: PageProps): Promise<React.
         <article className="bg-white rounded-lg shadow-md overflow-hidden">
           {/* 記事ヘッダー */}
           <div className="p-8 border-b border-gray-200">
+            {/* 研究報告書ヘッダー */}
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 mb-6">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-medium text-blue-600">夜遊び研究所</span>
+                <span className="text-xs text-gray-500">研究報告書</span>
+              </div>
+              <div className="text-xs text-gray-600">
+                Report No. {article.slug.toUpperCase().replace(/-/g, '')} / {formatDate(article.publishedAt).replace(/年|月|日/g, '').replace(/\s/g, '')}
+              </div>
+            </div>
+
             <div className="flex items-center justify-between mb-4">
               <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border ${getCategoryColor(article.category)}`}>
                 {article.category}
               </span>
-              {article.isPremium && (
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800 border border-yellow-200">
-                  Premium
+              <div className="flex items-center space-x-2">
+                {article.isPremium && (
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800 border border-yellow-200">
+                    Premium
+                  </span>
+                )}
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 border border-green-200">
+                  研究完了
                 </span>
-              )}
+              </div>
             </div>
 
             <h1 className="text-3xl font-bold text-gray-900 mb-4">
               {article.title}
             </h1>
 
+            {/* 研究概要 */}
+            <div className="bg-gray-50 rounded-lg p-4 mb-6">
+              <p className="text-gray-700 text-sm leading-relaxed">
+                {article.excerpt}
+              </p>
+            </div>
+
             {/* メタ情報 */}
-            <div className="flex flex-wrap items-center gap-6 text-sm text-gray-600 mb-6">
-              <div className="flex items-center">
-                <CalendarIcon className="h-4 w-4 mr-1" />
-                <span>{formatDate(article.publishedAt)}</span>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div className="text-center p-3 bg-white rounded-lg border">
+                <CalendarIcon className="h-5 w-5 mx-auto mb-1 text-blue-600" />
+                <div className="text-xs text-gray-500">研究日</div>
+                <div className="text-sm font-medium">{formatDate(article.publishedAt)}</div>
               </div>
-              <div className="flex items-center">
-                <ClockIcon className="h-4 w-4 mr-1" />
-                <span>{article.readTime}</span>
+              <div className="text-center p-3 bg-white rounded-lg border">
+                <ClockIcon className="h-5 w-5 mx-auto mb-1 text-green-600" />
+                <div className="text-xs text-gray-500">読了時間</div>
+                <div className="text-sm font-medium">{article.readTime}</div>
               </div>
-              <div className="flex items-center">
-                <EyeIcon className="h-4 w-4 mr-1" />
-                <span>{article.viewCount.toLocaleString()}</span>
+              <div className="text-center p-3 bg-white rounded-lg border">
+                <EyeIcon className="h-5 w-5 mx-auto mb-1 text-purple-600" />
+                <div className="text-xs text-gray-500">閲覧数</div>
+                <div className="text-sm font-medium">{article.viewCount.toLocaleString()}</div>
               </div>
-              <div className="flex items-center">
-                <span>著者: {article.author}</span>
+              <div className="text-center p-3 bg-white rounded-lg border">
+                <div className="h-5 w-5 mx-auto mb-1 bg-orange-600 rounded-full flex items-center justify-center">
+                  <span className="text-white text-xs">研</span>
+                </div>
+                <div className="text-xs text-gray-500">研究員</div>
+                <div className="text-sm font-medium">{article.author}</div>
               </div>
             </div>
 
-            {/* タグ */}
-            <div className="flex flex-wrap gap-2">
-              {article.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-700"
-                >
-                  <TagIcon className="h-3 w-3 mr-1" />
-                  {tag}
-                </span>
-              ))}
+            {/* 研究タグ */}
+            <div className="border-t pt-4">
+              <div className="text-sm text-gray-600 mb-2">研究キーワード:</div>
+              <div className="flex flex-wrap gap-2">
+                {article.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700 border border-blue-200"
+                  >
+                    <TagIcon className="h-3 w-3 mr-1" />
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -136,17 +169,74 @@ export default async function ArticlePage({ params }: PageProps): Promise<React.
 
           {/* 記事フッター */}
           <div className="p-8 border-t border-gray-200 bg-gray-50">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-gray-600">
-                <p>※ 本記事は個人的な体験・感想に基づくものです</p>
-                <p>※ 情報は記事作成時点のものです</p>
+            {/* 研究所フッター */}
+            <div className="bg-white rounded-lg p-6 mb-6 border">
+              <div className="flex items-center mb-4">
+                <div className="h-8 w-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mr-3">
+                  <span className="text-white text-sm font-bold">研</span>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">高山まさあきの夜遊び研究所</h3>
+                  <p className="text-sm text-gray-600">実体験に基づく信頼できる情報をお届け</p>
+                </div>
               </div>
-              <div className="flex space-x-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div>
+                  <h4 className="font-medium text-gray-900 mb-2">研究方針</h4>
+                  <ul className="text-gray-600 space-y-1">
+                    <li>• 実体験重視</li>
+                    <li>• 客観的分析</li>
+                    <li>• 読者第一</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-medium text-gray-900 mb-2">研究分野</h4>
+                  <ul className="text-gray-600 space-y-1">
+                    <li>• 風俗体験談</li>
+                    <li>• FANZA動画分析</li>
+                    <li>• 業界トレンド</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-medium text-gray-900 mb-2">研究実績</h4>
+                  <ul className="text-gray-600 space-y-1">
+                    <li>• ライター歴8年</li>
+                    <li>• 年間300本レビュー</li>
+                    <li>• 全国取材実績</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <div className="text-sm text-gray-600">
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-3">
+                  <h4 className="font-medium text-yellow-800 mb-1">研究報告書についての注意事項</h4>
+                  <ul className="text-yellow-700 text-xs space-y-1">
+                    <li>• 本報告書は研究員の実体験・分析に基づくものです</li>
+                    <li>• 情報は研究時点のものであり、変更される可能性があります</li>
+                    <li>• 利用は自己責任でお願いします</li>
+                    <li>• 18歳未満の方は閲覧できません</li>
+                  </ul>
+                </div>
+                <p className="text-xs text-gray-500">
+                  研究番号: {article.slug.toUpperCase().replace(/-/g, '')} | 
+                  発行: 夜遊び研究所 | 
+                  最終更新: {formatDate(article.publishedAt)}
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
                 <Link
                   href="/articles"
-                  className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-center"
                 >
-                  記事一覧に戻る
+                  研究報告一覧
+                </Link>
+                <Link
+                  href="/"
+                  className="inline-flex items-center px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-center"
+                >
+                  研究所トップ
                 </Link>
               </div>
             </div>
