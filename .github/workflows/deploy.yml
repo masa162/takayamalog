@@ -31,6 +31,14 @@ jobs:
       - name: Check formatting
         run: npm run format:check
 
+      - name: Build project
+        run: unset NODE_ENV && npm run build
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co' }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder_key' }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY || 'placeholder_service_key' }}
+
       - name: Deploy to Vercel (Temporarily Disabled)
         if: false  # Temporarily disabled until secrets are configured
         uses: amondnet/vercel-action@v25
