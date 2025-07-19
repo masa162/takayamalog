@@ -32,25 +32,47 @@ export default function ArticleCard({
     })
   }
 
-  const getCategoryColor = (category: string): string => {
+  const getCategoryStyle = (category: string): React.CSSProperties => {
     switch (category) {
       case '風俗体験談':
-        return 'bg-red-100 text-red-800 border-red-200'
+        return {
+          background: 'rgba(239, 68, 68, 0.1)',
+          color: '#ef4444',
+          border: '1px solid rgba(239, 68, 68, 0.2)'
+        }
       case 'FANZA動画':
-        return 'bg-purple-100 text-purple-800 border-purple-200'
+        return {
+          background: 'rgba(139, 92, 246, 0.1)',
+          color: '#8b5cf6',
+          border: '1px solid rgba(139, 92, 246, 0.2)'
+        }
       case '業界研究':
-        return 'bg-blue-100 text-blue-800 border-blue-200'
+        return {
+          background: 'rgba(59, 130, 246, 0.1)',
+          color: '#3b82f6',
+          border: '1px solid rgba(59, 130, 246, 0.2)'
+        }
       default:
-        return 'bg-gray-100 text-gray-800 border-gray-200'
+        return {
+          background: 'rgba(115, 115, 115, 0.1)',
+          color: '#737373',
+          border: '1px solid rgba(115, 115, 115, 0.2)'
+        }
     }
   }
 
   return (
-    <article className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+    <article className="rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02]"
+             style={{ 
+               background: 'var(--surface)',
+               border: '1px solid var(--border)',
+               boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+             }}>
       <Link href={href}>
         <div className="block">
           {/* サムネイル */}
-          <div className="relative h-48 bg-gray-200 overflow-hidden">
+          <div className="relative h-48 overflow-hidden"
+               style={{ background: 'var(--surface-elevated)' }}>
             {thumbnail ? (
               <img
                 src={thumbnail}
@@ -58,21 +80,27 @@ export default function ArticleCard({
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center">
-                <span className="text-gray-600 text-sm">No Image</span>
+              <div className="w-full h-full flex items-center justify-center"
+                   style={{ background: 'linear-gradient(135deg, var(--border) 0%, var(--border-light) 100%)' }}>
+                <span className="text-sm" style={{ color: 'var(--text-muted)' }}>No Image</span>
               </div>
             )}
             
             {/* プレミアムバッジ */}
             {isPremium && (
-              <div className="absolute top-3 right-3 bg-yellow-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+              <div className="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-bold"
+                   style={{ 
+                     background: 'linear-gradient(45deg, #fbbf24, #f59e0b)',
+                     color: 'white'
+                   }}>
                 Premium
               </div>
             )}
             
             {/* カテゴリーバッジ */}
             <div className="absolute bottom-3 left-3">
-              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getCategoryColor(category)}`}>
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                    style={getCategoryStyle(category)}>
                 {category}
               </span>
             </div>
@@ -80,16 +108,18 @@ export default function ArticleCard({
 
           {/* コンテンツ */}
           <div className="p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
+            <h3 className="text-xl font-semibold mb-3 line-clamp-2 transition-colors hover:opacity-80"
+                style={{ color: 'var(--text-primary)' }}>
               {title}
             </h3>
             
-            <p className="text-gray-600 mb-4 line-clamp-3">
+            <p className="mb-4 line-clamp-3" style={{ color: 'var(--text-secondary)' }}>
               {excerpt}
             </p>
             
             {/* メタ情報 */}
-            <div className="flex items-center justify-between text-sm text-gray-500">
+            <div className="flex items-center justify-between text-sm" 
+                 style={{ color: 'var(--text-muted)' }}>
               <div className="flex items-center space-x-4">
                 <div className="flex items-center">
                   <CalendarIcon className="h-4 w-4 mr-1" />

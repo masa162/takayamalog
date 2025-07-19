@@ -15,16 +15,19 @@
     "supabase:start": "supabase start",
     "supabase:stop": "supabase stop",
     "supabase:reset": "supabase db reset",
-    "supabase:gen-types": "supabase gen types typescript --local > src/types/database.types.ts"
+    "supabase:gen-types": "supabase gen types typescript --local > src/types/database.types.ts",
+    "migrate:articles": "tsx src/scripts/migrate-articles.ts"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.50.3",
+    "dotenv": "^17.2.0",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
     "marked": "^16.0.0",
     "next": "15.3.5",
+    "node-fetch": "^3.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -42,6 +45,7 @@
     "eslint-config-prettier": "^10.1.5",
     "prettier": "^3.6.2",
     "tailwindcss": "^4",
+    "tsx": "^4.19.0",
     "typescript": "^5"
   }
 }
