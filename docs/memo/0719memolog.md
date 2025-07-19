@@ -291,8 +291,165 @@ memo
 
 teset
 
----
+***
 
 またリミット
 トークンだけムダ遣いしてるような気分なってくる。。
 PM８時いこうトライ
+
+
+
+「Some checks were not successful
+2 failing and 1 successful checks
+
+CI / test (push) Failing after 30s
+Details
+
+Deploy to Vercel / deploy (push) Failing after 28s
+Details
+
+Vercel - Deployment has completed」
+
+「Skip to content
+Navigation Menu
+masa162
+takayamalog
+
+Type / to search
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+Deploy to Vercel
+fix: deployワークフローにビルドステップを追加 #21
+Jobs
+Run details
+Annotations
+1 error
+deploy
+failed 14 minutes ago in 28s
+Search logs
+1s
+1s
+4s
+10s
+3s
+4s
+2s
+Run npm run format:check
+
+> takayamalog@0.1.0 format:check
+> prettier --check .
+
+Checking formatting...
+[warn] .github/workflows/deploy.yml
+[warn] docs/memo/0719memolog.md
+[warn] Code style issues found in 2 files. Run Prettier with --write to fix.
+Error: Process completed with exit code 1.
+0s
+0s
+0s
+0s
+0s
+fix: deployワークフローにビルドステップを追加 · masa162/takayamalog@7f43d8d」
+
+「All checks have passed
+3 successful checks
+
+CI / test (push) Successful in 50s
+Details
+
+Deploy to Vercel / deploy (push) Successful in 49s
+Details
+
+Vercel - Deployment has completed
+Details」
+
+通りました。ありがとうございます
+しかし、本番URLで表示出ないですね。
+takayamalog.com
+
+
+「Some checks were not successful
+2 failing and 1 successful checks
+
+CI / test (push) Failing after 25s
+Details
+
+Deploy to Vercel / deploy (push) Failing after 25s
+Details
+
+Vercel - Deployment has completed
+Details」
+
+Skip to content
+Navigation Menu
+masa162
+takayamalog
+
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+CI
+fix: ミドルウェアのエラーハンドリング強化 #24
+Annotations
+1 error
+test
+failed 1 minute ago in 25s
+1s
+1s
+3s
+9s
+4s
+3s
+2s
+Run npm run format:check
+
+> takayamalog@0.1.0 format:check
+> prettier --check .
+
+Checking formatting...
+[warn] src/middleware.ts
+[warn] Code style issues found in the above file. Run Prettier with --write to fix.
+Error: Process completed with exit code 1.
+0s
+0s
+0s
+1s
+0s
+fix: ミドルウェアのエラーハンドリング強化 · masa162/takayamalog@7aa732d
+
+
+
+「All checks have passed
+3 successful checks
+
+CI / test (push) Successful in 52s
+Details
+
+Deploy to Vercel / deploy (push) Successful in 50s
+Details
+
+Vercel - Deployment has completed
+Details」
+
+OKまた通せましたね。
+
+また、本番URLが準備中表示ででますね。
+
+
+***
+
+/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/image.png
+
+vercerl側
+設定できてないですかね？
+教えてほしいです、
