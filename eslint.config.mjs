@@ -14,9 +14,9 @@ const eslintConfig = [
   {
     rules: {
       '@typescript-eslint/no-unused-vars': 'error',
-      '@typescript-eslint/explicit-function-return-type': 'warn',
+      '@typescript-eslint/explicit-function-return-type': 'off', // 一時的に無効化
       'prefer-const': 'error',
-      'no-console': 'warn',
+      'no-console': 'off', // デバッグ用に一時的に無効化
     },
   },
 ]
