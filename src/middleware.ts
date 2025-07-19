@@ -4,7 +4,7 @@ import { updateSession } from '@/lib/supabase/middleware'
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  
+
   // Supabase環境変数がない場合はSupabaseセッション更新をスキップ
   let supabaseResponse
   try {
