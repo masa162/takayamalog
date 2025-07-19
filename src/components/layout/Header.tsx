@@ -20,33 +20,48 @@ export default function Header(): React.JSX.Element {
   ]
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-sm"
-            style={{ 
-              background: 'rgba(10, 10, 10, 0.95)',
-              borderBottom: '1px solid var(--border)',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-            }}>
+    <header
+      className="sticky top-0 z-50 backdrop-blur-sm"
+      style={{
+        background: 'rgba(10, 10, 10, 0.95)',
+        borderBottom: '1px solid var(--border)',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+      }}
+    >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* ロゴ */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-                 style={{ background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)' }}>
+            <div
+              className="w-8 h-8 rounded-lg flex items-center justify-center"
+              style={{
+                background:
+                  'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
+              }}
+            >
               <span className="text-white font-bold text-sm">研</span>
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
+              <h1
+                className="text-lg font-bold"
+                style={{ color: 'var(--text-primary)' }}
+              >
                 高山まさあきの夜遊び研究所
               </h1>
             </div>
             <div className="sm:hidden">
-              <h1 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>夜遊び研究所</h1>
+              <h1
+                className="text-lg font-bold"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                夜遊び研究所
+              </h1>
             </div>
           </Link>
 
           {/* デスクトップナビゲーション */}
           <nav className="hidden md:flex space-x-8">
-            {navigation.map((item) => (
+            {navigation.map(item => (
               <Link
                 key={item.name}
                 href={item.href}
@@ -75,17 +90,19 @@ export default function Header(): React.JSX.Element {
 
         {/* モバイルメニュー */}
         {isMenuOpen && (
-          <div className="md:hidden py-4"
-               style={{ borderTop: '1px solid var(--border)' }}>
+          <div
+            className="md:hidden py-4"
+            style={{ borderTop: '1px solid var(--border)' }}
+          >
             <nav className="flex flex-col space-y-4">
-              {navigation.map((item) => (
+              {navigation.map(item => (
                 <Link
                   key={item.name}
                   href={item.href}
                   className="transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:opacity-80"
-                  style={{ 
+                  style={{
                     color: 'var(--text-secondary)',
-                    background: 'transparent'
+                    background: 'transparent',
                   }}
                   onClick={() => setIsMenuOpen(false)}
                 >

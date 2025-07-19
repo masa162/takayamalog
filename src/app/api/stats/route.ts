@@ -8,7 +8,7 @@ import { getArticleStats } from '@/lib/database/articles'
 export async function GET(): Promise<NextResponse> {
   try {
     const stats = await getArticleStats()
-    
+
     return NextResponse.json(stats)
   } catch (error) {
     console.error('統計情報取得エラー:', error)

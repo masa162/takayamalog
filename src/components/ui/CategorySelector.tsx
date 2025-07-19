@@ -24,9 +24,11 @@ export default function CategorySelector({
   className = '',
 }: CategorySelectorProps): React.JSX.Element {
   const [isOpen, setIsOpen] = useState(false)
-  
-  const selectedCategoryData = categories.find(cat => cat.id === selectedCategory)
-  
+
+  const selectedCategoryData = categories.find(
+    cat => cat.id === selectedCategory
+  )
+
   const getCategoryColorClasses = (color: string): string => {
     switch (color) {
       case 'red':
@@ -46,7 +48,7 @@ export default function CategorySelector({
     <div className={`relative ${className}`}>
       {/* デスクトップ版：タブスタイル */}
       <div className="hidden md:flex space-x-2 flex-wrap">
-        {categories.map((category) => (
+        {categories.map(category => (
           <button
             key={category.id}
             onClick={() => onCategoryChange(category.id)}
@@ -75,7 +77,9 @@ export default function CategorySelector({
         >
           <span className="flex items-center">
             {selectedCategoryData && (
-              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border mr-2 ${getCategoryColorClasses(selectedCategoryData.color)}`}>
+              <span
+                className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border mr-2 ${getCategoryColorClasses(selectedCategoryData.color)}`}
+              >
                 {selectedCategoryData.name}
               </span>
             )}
@@ -89,7 +93,7 @@ export default function CategorySelector({
         {isOpen && (
           <div className="absolute z-10 mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg">
             <div className="py-2">
-              {categories.map((category) => (
+              {categories.map(category => (
                 <button
                   key={category.id}
                   onClick={() => {
@@ -101,7 +105,9 @@ export default function CategorySelector({
                   }`}
                 >
                   <span className="flex items-center">
-                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border mr-2 ${getCategoryColorClasses(category.color)}`}>
+                    <span
+                      className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border mr-2 ${getCategoryColorClasses(category.color)}`}
+                    >
                       {category.name}
                     </span>
                   </span>

@@ -12,30 +12,40 @@ interface ArticlesPageClientProps {
   categories: Array<{ id: string; name: string; color: string; count: number }>
 }
 
-export default function ArticlesPageClient({ initialArticles, categories }: ArticlesPageClientProps): React.JSX.Element {
+export default function ArticlesPageClient({
+  initialArticles,
+  categories,
+}: ArticlesPageClientProps): React.JSX.Element {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  
+
   // 記事フィルタリング
   const filteredArticles = initialArticles.filter(article => {
-    const matchesCategory = selectedCategory === 'all' || 
+    const matchesCategory =
+      selectedCategory === 'all' ||
       (selectedCategory === 'fuzoku' && article.category === '風俗体験談') ||
       (selectedCategory === 'fanza' && article.category === 'FANZA動画') ||
       (selectedCategory === 'research' && article.category === '業界研究')
-    
-    const matchesSearch = !searchQuery || 
+
+    const matchesSearch =
+      !searchQuery ||
       article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       article.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      article.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-    
+      article.tags.some(tag =>
+        tag.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+
     return matchesCategory && matchesSearch
   })
 
   const articlesPerPage = 6
   const totalPages = Math.ceil(filteredArticles.length / articlesPerPage)
   const startIndex = (currentPage - 1) * articlesPerPage
-  const displayedArticles = filteredArticles.slice(startIndex, startIndex + articlesPerPage)
+  const displayedArticles = filteredArticles.slice(
+    startIndex,
+    startIndex + articlesPerPage
+  )
 
   const handleCategoryChange = (categoryId: string): void => {
     setSelectedCategory(categoryId)
@@ -56,9 +66,7 @@ export default function ArticlesPageClient({ initialArticles, categories }: Arti
       <div className="container mx-auto px-4 py-8">
         {/* ヘッダーセクション */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            記事一覧
-          </h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">記事一覧</h1>
           <p className="text-xl text-gray-600 mb-8">
             研究所の最新記事をお楽しみください
           </p>
@@ -99,7 +107,9 @@ export default function ArticlesPageClient({ initialArticles, categories }: Arti
               )}
             </div>
             <div className="text-sm text-gray-500">
-              {startIndex + 1} - {Math.min(startIndex + articlesPerPage, filteredArticles.length)} 件目を表示
+              {startIndex + 1} -{' '}
+              {Math.min(startIndex + articlesPerPage, filteredArticles.length)}{' '}
+              件目を表示
             </div>
           </div>
         </div>
@@ -108,7 +118,7 @@ export default function ArticlesPageClient({ initialArticles, categories }: Arti
         <div className="mb-8">
           {displayedArticles.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {displayedArticles.map((article) => (
+              {displayedArticles.map(article => (
                 <ArticleCard
                   key={article.id}
                   title={article.title}
@@ -125,7 +135,9 @@ export default function ArticlesPageClient({ initialArticles, categories }: Arti
             </div>
           ) : (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">該当する記事が見つかりませんでした</p>
+              <p className="text-gray-500 text-lg">
+                該当する記事が見つかりませんでした
+              </p>
               <p className="text-gray-400 text-sm mt-2">
                 検索条件を変更してもう一度お試しください
               </p>

@@ -39,7 +39,7 @@ function getSlugFromFileName(fileName: string): string {
 export function getArticleMetadata(slug: string): ArticleMetadata | null {
   try {
     const fullPath = path.join(articlesDirectory, `${slug}.md`)
-    
+
     if (!fs.existsSync(fullPath)) {
       return null
     }
@@ -73,7 +73,7 @@ export function getArticleMetadata(slug: string): ArticleMetadata | null {
 export function getArticleBySlug(slug: string): Article | null {
   try {
     const fullPath = path.join(articlesDirectory, `${slug}.md`)
-    
+
     if (!fs.existsSync(fullPath)) {
       return null
     }
@@ -115,15 +115,16 @@ export function getAllArticleMetadata(): ArticleMetadata[] {
   filePaths.forEach(fileName => {
     const slug = getSlugFromFileName(fileName)
     const metadata = getArticleMetadata(slug)
-    
+
     if (metadata) {
       articles.push(metadata)
     }
   })
 
   // 公開日の降順でソート
-  return articles.sort((a, b) => 
-    new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  return articles.sort(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   )
 }
 
@@ -142,34 +143,39 @@ export function searchArticles(query: string): ArticleMetadata[] {
   const allArticles = getAllArticleMetadata()
   const searchTerm = query.toLowerCase()
 
-  return allArticles.filter(article => 
-    article.title.toLowerCase().includes(searchTerm) ||
-    article.excerpt.toLowerCase().includes(searchTerm) ||
-    article.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+  return allArticles.filter(
+    article =>
+      article.title.toLowerCase().includes(searchTerm) ||
+      article.excerpt.toLowerCase().includes(searchTerm) ||
+      article.tags.some(tag => tag.toLowerCase().includes(searchTerm))
   )
 }
 
 /**
  * 関連記事を取得
  */
-export function getRelatedArticles(article: ArticleMetadata, limit: number = 3): ArticleMetadata[] {
+export function getRelatedArticles(
+  article: ArticleMetadata,
+  limit: number = 3
+): ArticleMetadata[] {
   const allArticles = getAllArticleMetadata()
-  
+
   // 同じカテゴリーの記事を優先
-  const sameCategory = allArticles.filter(a => 
-    a.id !== article.id && a.category === article.category
+  const sameCategory = allArticles.filter(
+    a => a.id !== article.id && a.category === article.category
   )
-  
+
   // 同じタグを持つ記事
-  const sameTags = allArticles.filter(a => 
-    a.id !== article.id && 
-    a.category !== article.category &&
-    a.tags.some(tag => article.tags.includes(tag))
+  const sameTags = allArticles.filter(
+    a =>
+      a.id !== article.id &&
+      a.category !== article.category &&
+      a.tags.some(tag => article.tags.includes(tag))
   )
-  
+
   // 結果をマージして制限数に切り詰め
   const related = [...sameCategory, ...sameTags].slice(0, limit)
-  
+
   return related
 }
 
@@ -182,18 +188,19 @@ export function getArticleStats(): {
   totalViews: number
 } {
   const allArticles = getAllArticleMetadata()
-  
+
   const articlesByCategory: Record<string, number> = {}
   let totalViews = 0
-  
+
   allArticles.forEach(article => {
     // カテゴリー別カウント
-    articlesByCategory[article.category] = (articlesByCategory[article.category] || 0) + 1
-    
+    articlesByCategory[article.category] =
+      (articlesByCategory[article.category] || 0) + 1
+
     // 総閲覧数
     totalViews += article.viewCount
   })
-  
+
   return {
     totalArticles: allArticles.length,
     articlesByCategory,
@@ -226,9 +233,7 @@ export function getLatestArticles(limit: number = 5): ArticleMetadata[] {
  */
 export function getPopularArticles(limit: number = 5): ArticleMetadata[] {
   const allArticles = getAllArticleMetadata()
-  return allArticles
-    .sort((a, b) => b.viewCount - a.viewCount)
-    .slice(0, limit)
+  return allArticles.sort((a, b) => b.viewCount - a.viewCount).slice(0, limit)
 }
 
 /**
@@ -248,13 +253,13 @@ export function getCategories(): Array<{
   count: number
 }> {
   const stats = getArticleStats()
-  
+
   const categoryMapping: Record<string, string> = {
-    '風俗体験談': 'fuzoku',
-    'FANZA動画': 'fanza',
-    '業界研究': 'research',
+    風俗体験談: 'fuzoku',
+    FANZA動画: 'fanza',
+    業界研究: 'research',
   }
-  
+
   return Object.entries(stats.articlesByCategory).map(([name, count]) => ({
     name,
     slug: categoryMapping[name] || name.toLowerCase(),

@@ -20,23 +20,32 @@ interface CategoryPageClientProps {
   initialArticles: ArticleMetadata[]
 }
 
-export default function CategoryPageClient({ category, initialArticles }: CategoryPageClientProps): React.JSX.Element {
+export default function CategoryPageClient({
+  category,
+  initialArticles,
+}: CategoryPageClientProps): React.JSX.Element {
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  
+
   const filteredArticles = initialArticles.filter(article => {
-    const matchesSearch = !searchQuery || 
+    const matchesSearch =
+      !searchQuery ||
       article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       article.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      article.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-    
+      article.tags.some(tag =>
+        tag.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+
     return matchesSearch
   })
 
   const articlesPerPage = 6
   const totalPages = Math.ceil(filteredArticles.length / articlesPerPage)
   const startIndex = (currentPage - 1) * articlesPerPage
-  const displayedArticles = filteredArticles.slice(startIndex, startIndex + articlesPerPage)
+  const displayedArticles = filteredArticles.slice(
+    startIndex,
+    startIndex + articlesPerPage
+  )
 
   const handleSearch = (query: string): void => {
     setSearchQuery(query)
@@ -83,27 +92,31 @@ export default function CategoryPageClient({ category, initialArticles }: Catego
         </nav>
 
         {/* カテゴリーヘッダー */}
-        <div className={`bg-gradient-to-r ${getCategoryColorClasses(category.color)} rounded-lg p-8 mb-8`}>
+        <div
+          className={`bg-gradient-to-r ${getCategoryColorClasses(category.color)} rounded-lg p-8 mb-8`}
+        >
           {/* 研究分野ヘッダー */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center">
               <span className="text-4xl mr-4">{category.icon}</span>
               <div>
                 <h1 className="text-3xl font-bold">{category.name}</h1>
-                <div className="text-sm opacity-80 mt-1">研究分野 / Research Field</div>
+                <div className="text-sm opacity-80 mt-1">
+                  研究分野 / Research Field
+                </div>
               </div>
             </div>
             <div className="text-right">
               <div className="bg-white bg-opacity-20 rounded-lg px-3 py-2">
                 <div className="text-sm opacity-80">研究報告数</div>
-                <div className="text-2xl font-bold">{filteredArticles.length}</div>
+                <div className="text-2xl font-bold">
+                  {filteredArticles.length}
+                </div>
               </div>
             </div>
           </div>
-          <p className="text-lg opacity-90 mb-6">
-            {category.description}
-          </p>
-          
+          <p className="text-lg opacity-90 mb-6">{category.description}</p>
+
           {/* 研究統計 */}
           <div className="grid grid-cols-3 gap-4">
             <div className="bg-white bg-opacity-10 rounded-lg p-3 text-center">
@@ -112,7 +125,9 @@ export default function CategoryPageClient({ category, initialArticles }: Catego
             </div>
             <div className="bg-white bg-opacity-10 rounded-lg p-3 text-center">
               <div className="text-xl font-bold">
-                {filteredArticles.reduce((sum, article) => sum + article.viewCount, 0).toLocaleString()}
+                {filteredArticles
+                  .reduce((sum, article) => sum + article.viewCount, 0)
+                  .toLocaleString()}
               </div>
               <div className="text-xs opacity-80">総閲覧数</div>
             </div>
@@ -128,7 +143,8 @@ export default function CategoryPageClient({ category, initialArticles }: Catego
         {/* 年齢確認警告 */}
         <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-8">
           <p className="text-red-800 text-sm">
-            ⚠️ このカテゴリーは18歳未満の方の閲覧を禁止しています。成人向けコンテンツが含まれています。
+            ⚠️
+            このカテゴリーは18歳未満の方の閲覧を禁止しています。成人向けコンテンツが含まれています。
           </p>
         </div>
 
@@ -153,7 +169,9 @@ export default function CategoryPageClient({ category, initialArticles }: Catego
               )}
             </div>
             <div className="text-sm text-gray-500">
-              {startIndex + 1} - {Math.min(startIndex + articlesPerPage, filteredArticles.length)} 件目を表示
+              {startIndex + 1} -{' '}
+              {Math.min(startIndex + articlesPerPage, filteredArticles.length)}{' '}
+              件目を表示
             </div>
           </div>
         </div>
@@ -162,7 +180,7 @@ export default function CategoryPageClient({ category, initialArticles }: Catego
         <div className="mb-8">
           {displayedArticles.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {displayedArticles.map((article) => (
+              {displayedArticles.map(article => (
                 <ArticleCard
                   key={article.id}
                   title={article.title}
@@ -179,7 +197,9 @@ export default function CategoryPageClient({ category, initialArticles }: Catego
             </div>
           ) : (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">該当する記事が見つかりませんでした</p>
+              <p className="text-gray-500 text-lg">
+                該当する記事が見つかりませんでした
+              </p>
               <p className="text-gray-400 text-sm mt-2">
                 検索条件を変更してもう一度お試しください
               </p>
@@ -251,7 +271,7 @@ export default function CategoryPageClient({ category, initialArticles }: Catego
                   )}
                 </ul>
               </div>
-              
+
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                   <span className="h-6 w-6 bg-green-100 rounded-full flex items-center justify-center mr-2">
@@ -260,10 +280,31 @@ export default function CategoryPageClient({ category, initialArticles }: Catego
                   研究成果
                 </h3>
                 <ul className="space-y-2 text-gray-600">
-                  <li>• 総研究報告: <strong>{filteredArticles.length}</strong> 件</li>
-                  <li>• 累計閲覧数: <strong>{filteredArticles.reduce((sum, article) => sum + article.viewCount, 0).toLocaleString()}</strong> 回</li>
-                  <li>• Premium研究: <strong>{filteredArticles.filter(article => article.isPremium).length}</strong> 件</li>
-                  <li>• 更新頻度: <strong>週2-3回</strong></li>
+                  <li>
+                    • 総研究報告: <strong>{filteredArticles.length}</strong> 件
+                  </li>
+                  <li>
+                    • 累計閲覧数:{' '}
+                    <strong>
+                      {filteredArticles
+                        .reduce((sum, article) => sum + article.viewCount, 0)
+                        .toLocaleString()}
+                    </strong>{' '}
+                    回
+                  </li>
+                  <li>
+                    • Premium研究:{' '}
+                    <strong>
+                      {
+                        filteredArticles.filter(article => article.isPremium)
+                          .length
+                      }
+                    </strong>{' '}
+                    件
+                  </li>
+                  <li>
+                    • 更新頻度: <strong>週2-3回</strong>
+                  </li>
                 </ul>
               </div>
 
@@ -306,17 +347,16 @@ export default function CategoryPageClient({ category, initialArticles }: Catego
             {/* 研究所からのメッセージ */}
             <div className="mt-8 pt-8 border-t border-gray-200">
               <div className="bg-blue-50 rounded-lg p-6">
-                <h4 className="font-semibold text-blue-900 mb-2">研究所からのメッセージ</h4>
+                <h4 className="font-semibold text-blue-900 mb-2">
+                  研究所からのメッセージ
+                </h4>
                 <p className="text-blue-800 text-sm leading-relaxed">
-                  {category.slug === 'fuzoku' && 
-                    '当研究所では、風俗業界の透明性向上と利用者の安全確保を目指し、実体験に基づく客観的な情報提供に努めています。すべての研究は法的・倫理的配慮のもと実施されています。'
-                  }
-                  {category.slug === 'fanza' && 
-                    'FANZA動画市場の分析を通じて、視聴者の皆様により良い作品選択の機会を提供したいと考えています。データに基づく客観的な評価で、充実した視聴体験をサポートします。'
-                  }
-                  {category.slug === 'research' && 
-                    '大人の夜遊び業界は急速に変化しており、その動向を科学的に分析することで業界の健全な発展に貢献したいと考えています。データドリブンなアプローチで価値ある洞察を提供します。'
-                  }
+                  {category.slug === 'fuzoku' &&
+                    '当研究所では、風俗業界の透明性向上と利用者の安全確保を目指し、実体験に基づく客観的な情報提供に努めています。すべての研究は法的・倫理的配慮のもと実施されています。'}
+                  {category.slug === 'fanza' &&
+                    'FANZA動画市場の分析を通じて、視聴者の皆様により良い作品選択の機会を提供したいと考えています。データに基づく客観的な評価で、充実した視聴体験をサポートします。'}
+                  {category.slug === 'research' &&
+                    '大人の夜遊び業界は急速に変化しており、その動向を科学的に分析することで業界の健全な発展に貢献したいと考えています。データドリブンなアプローチで価値ある洞察を提供します。'}
                 </p>
               </div>
             </div>

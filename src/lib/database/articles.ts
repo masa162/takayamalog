@@ -54,16 +54,22 @@ export interface ArticleInput {
 /**
  * 記事を作成
  */
-export async function createArticle(input: ArticleInput): Promise<DatabaseArticle> {
+export async function createArticle(
+  input: ArticleInput
+): Promise<DatabaseArticle> {
   const supabase = await createClient()
-  
+
   const { data, error } = await supabase
     .from('articles')
     .insert({
       ...input,
-      published_at: input.status === 'published' ? (input.published_at || new Date().toISOString()) : null
+      published_at:
+        input.status === 'published'
+          ? input.published_at || new Date().toISOString()
+          : null,
     })
-    .select(`
+    .select(
+      `
       *,
       categories (
         name,
@@ -71,7 +77,8 @@ export async function createArticle(input: ArticleInput): Promise<DatabaseArticl
         article_type,
         color
       )
-    `)
+    `
+    )
     .single()
 
   if (error) {
@@ -84,14 +91,17 @@ export async function createArticle(input: ArticleInput): Promise<DatabaseArticl
 /**
  * 記事を更新
  */
-export async function updateArticle(id: string, input: Partial<ArticleInput>): Promise<DatabaseArticle> {
+export async function updateArticle(
+  id: string,
+  input: Partial<ArticleInput>
+): Promise<DatabaseArticle> {
   const supabase = await createClient()
-  
+
   const updateData = {
     ...input,
-    updated_at: new Date().toISOString()
+    updated_at: new Date().toISOString(),
   }
-  
+
   // published_atの処理
   if (input.status === 'published' && !input.published_at) {
     updateData.published_at = new Date().toISOString()
@@ -103,7 +113,8 @@ export async function updateArticle(id: string, input: Partial<ArticleInput>): P
     .from('articles')
     .update(updateData)
     .eq('id', id)
-    .select(`
+    .select(
+      `
       *,
       categories (
         name,
@@ -111,7 +122,8 @@ export async function updateArticle(id: string, input: Partial<ArticleInput>): P
         article_type,
         color
       )
-    `)
+    `
+    )
     .single()
 
   if (error) {
@@ -126,11 +138,8 @@ export async function updateArticle(id: string, input: Partial<ArticleInput>): P
  */
 export async function deleteArticle(id: string): Promise<void> {
   const supabase = await createClient()
-  
-  const { error } = await supabase
-    .from('articles')
-    .delete()
-    .eq('id', id)
+
+  const { error } = await supabase.from('articles').delete().eq('id', id)
 
   if (error) {
     throw new Error(`記事削除エラー: ${error.message}`)
@@ -140,12 +149,15 @@ export async function deleteArticle(id: string): Promise<void> {
 /**
  * IDで記事を取得
  */
-export async function getArticleById(id: string): Promise<DatabaseArticle | null> {
+export async function getArticleById(
+  id: string
+): Promise<DatabaseArticle | null> {
   const supabase = await createClient()
-  
+
   const { data, error } = await supabase
     .from('articles')
-    .select(`
+    .select(
+      `
       *,
       categories (
         name,
@@ -153,7 +165,8 @@ export async function getArticleById(id: string): Promise<DatabaseArticle | null
         article_type,
         color
       )
-    `)
+    `
+    )
     .eq('id', id)
     .single()
 
@@ -170,12 +183,15 @@ export async function getArticleById(id: string): Promise<DatabaseArticle | null
 /**
  * スラッグで記事を取得
  */
-export async function getArticleBySlug(slug: string): Promise<DatabaseArticle | null> {
+export async function getArticleBySlug(
+  slug: string
+): Promise<DatabaseArticle | null> {
   const supabase = await createClient()
-  
+
   const { data, error } = await supabase
     .from('articles')
-    .select(`
+    .select(
+      `
       *,
       categories (
         name,
@@ -183,7 +199,8 @@ export async function getArticleBySlug(slug: string): Promise<DatabaseArticle | 
         article_type,
         color
       )
-    `)
+    `
+    )
     .eq('slug', slug)
     .eq('status', 'published')
     .single()
@@ -201,21 +218,22 @@ export async function getArticleBySlug(slug: string): Promise<DatabaseArticle | 
 /**
  * 記事一覧を取得
  */
-export async function getArticles(options: {
-  limit?: number
-  offset?: number
-  category?: string
-  article_type?: string
-  status?: string
-  search?: string
-  sort?: 'created_at' | 'published_at' | 'view_count' | 'rating'
-  order?: 'asc' | 'desc'
-} = {}): Promise<{ data: DatabaseArticle[], count: number }> {
+export async function getArticles(
+  options: {
+    limit?: number
+    offset?: number
+    category?: string
+    article_type?: string
+    status?: string
+    search?: string
+    sort?: 'created_at' | 'published_at' | 'view_count' | 'rating'
+    order?: 'asc' | 'desc'
+  } = {}
+): Promise<{ data: DatabaseArticle[]; count: number }> {
   const supabase = await createClient()
-  
-  let query = supabase
-    .from('articles')
-    .select(`
+
+  let query = supabase.from('articles').select(
+    `
       *,
       categories (
         name,
@@ -223,38 +241,43 @@ export async function getArticles(options: {
         article_type,
         color
       )
-    `, { count: 'exact' })
-  
+    `,
+    { count: 'exact' }
+  )
+
   // フィルター条件
   if (options.status) {
     query = query.eq('status', options.status)
   } else {
     query = query.eq('status', 'published')
   }
-  
+
   if (options.category) {
     query = query.eq('categories.slug', options.category)
   }
-  
+
   if (options.article_type) {
     query = query.eq('article_type', options.article_type)
   }
-  
+
   if (options.search) {
     query = query.textSearch('title', options.search)
   }
-  
+
   // ソート
   const sort = options.sort || 'published_at'
   const order = options.order || 'desc'
   query = query.order(sort, { ascending: order === 'asc' })
-  
+
   // ページネーション
   if (options.limit) {
     query = query.limit(options.limit)
   }
   if (options.offset) {
-    query = query.range(options.offset, options.offset + (options.limit || 10) - 1)
+    query = query.range(
+      options.offset,
+      options.offset + (options.limit || 10) - 1
+    )
   }
 
   const { data, error, count } = await query
@@ -269,38 +292,46 @@ export async function getArticles(options: {
 /**
  * 最新記事を取得
  */
-export async function getLatestArticles(limit: number = 5): Promise<DatabaseArticle[]> {
+export async function getLatestArticles(
+  limit: number = 5
+): Promise<DatabaseArticle[]> {
   const { data } = await getArticles({
     limit,
     sort: 'published_at',
-    order: 'desc'
+    order: 'desc',
   })
-  
+
   return data
 }
 
 /**
  * 人気記事を取得
  */
-export async function getPopularArticles(limit: number = 5): Promise<DatabaseArticle[]> {
+export async function getPopularArticles(
+  limit: number = 5
+): Promise<DatabaseArticle[]> {
   const { data } = await getArticles({
     limit,
     sort: 'view_count',
-    order: 'desc'
+    order: 'desc',
   })
-  
+
   return data
 }
 
 /**
  * 関連記事を取得
  */
-export async function getRelatedArticles(article: DatabaseArticle, limit: number = 3): Promise<DatabaseArticle[]> {
+export async function getRelatedArticles(
+  article: DatabaseArticle,
+  limit: number = 3
+): Promise<DatabaseArticle[]> {
   const supabase = await createClient()
-  
+
   const { data, error } = await supabase
     .from('articles')
-    .select(`
+    .select(
+      `
       *,
       categories (
         name,
@@ -308,7 +339,8 @@ export async function getRelatedArticles(article: DatabaseArticle, limit: number
         article_type,
         color
       )
-    `)
+    `
+    )
     .eq('status', 'published')
     .eq('article_type', article.article_type)
     .neq('id', article.id)
@@ -328,9 +360,9 @@ export async function getRelatedArticles(article: DatabaseArticle, limit: number
  */
 export async function incrementViewCount(articleId: string): Promise<void> {
   const supabase = await createClient()
-  
+
   const { error } = await supabase.rpc('increment_view_count', {
-    article_id: articleId
+    article_id: articleId,
   })
 
   if (error) {
@@ -348,18 +380,33 @@ export async function getArticleStats(): Promise<{
   totalCategories: number
 }> {
   const supabase = await createClient()
-  
-  const [articlesResult, viewsResult, ratingResult, categoriesResult] = await Promise.all([
-    supabase.from('articles').select('id', { count: 'exact', head: true }).eq('status', 'published'),
-    supabase.from('articles').select('view_count').eq('status', 'published'),
-    supabase.from('articles').select('rating').eq('status', 'published').not('rating', 'is', null),
-    supabase.from('categories').select('id', { count: 'exact', head: true })
-  ])
+
+  const [articlesResult, viewsResult, ratingResult, categoriesResult] =
+    await Promise.all([
+      supabase
+        .from('articles')
+        .select('id', { count: 'exact', head: true })
+        .eq('status', 'published'),
+      supabase.from('articles').select('view_count').eq('status', 'published'),
+      supabase
+        .from('articles')
+        .select('rating')
+        .eq('status', 'published')
+        .not('rating', 'is', null),
+      supabase.from('categories').select('id', { count: 'exact', head: true }),
+    ])
 
   const totalArticles = articlesResult.count || 0
-  const totalViews = viewsResult.data?.reduce((sum, article) => sum + (article.view_count || 0), 0) || 0
-  const averageRating = ratingResult.data?.length 
-    ? ratingResult.data.reduce((sum, article) => sum + (article.rating || 0), 0) / ratingResult.data.length
+  const totalViews =
+    viewsResult.data?.reduce(
+      (sum, article) => sum + (article.view_count || 0),
+      0
+    ) || 0
+  const averageRating = ratingResult.data?.length
+    ? ratingResult.data.reduce(
+        (sum, article) => sum + (article.rating || 0),
+        0
+      ) / ratingResult.data.length
     : 0
   const totalCategories = categoriesResult.count || 0
 
@@ -367,7 +414,7 @@ export async function getArticleStats(): Promise<{
     totalArticles,
     totalViews,
     averageRating: Math.round(averageRating * 10) / 10,
-    totalCategories
+    totalCategories,
   }
 }
 
@@ -389,7 +436,7 @@ export function convertToArticle(dbArticle: DatabaseArticle): Article {
     author: '高山まさあき',
     thumbnail: dbArticle.og_image_url || '',
     isPremium: false, // 後で実装
-    rating: dbArticle.rating
+    rating: dbArticle.rating,
   }
 }
 

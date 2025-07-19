@@ -44,7 +44,9 @@ const getServerFunctions = async () => {
 /**
  * 記事のメタデータを取得（サーバーサイドのみ）
  */
-export async function getArticleMetadata(slug: string): Promise<ArticleMetadata | null> {
+export async function getArticleMetadata(
+  slug: string
+): Promise<ArticleMetadata | null> {
   const server = await getServerFunctions()
   return server?.getArticleMetadata(slug) || null
 }
@@ -68,7 +70,9 @@ export async function getAllArticleMetadata(): Promise<ArticleMetadata[]> {
 /**
  * カテゴリー別の記事メタデータを取得
  */
-export async function getArticlesByCategory(category: string): Promise<ArticleMetadata[]> {
+export async function getArticlesByCategory(
+  category: string
+): Promise<ArticleMetadata[]> {
   const server = await getServerFunctions()
   return server?.getArticlesByCategory(category) || []
 }
@@ -76,7 +80,9 @@ export async function getArticlesByCategory(category: string): Promise<ArticleMe
 /**
  * 記事を検索
  */
-export async function searchArticles(query: string): Promise<ArticleMetadata[]> {
+export async function searchArticles(
+  query: string
+): Promise<ArticleMetadata[]> {
   const server = await getServerFunctions()
   return server?.searchArticles(query) || []
 }
@@ -84,7 +90,10 @@ export async function searchArticles(query: string): Promise<ArticleMetadata[]> 
 /**
  * 関連記事を取得
  */
-export async function getRelatedArticles(article: ArticleMetadata, limit: number = 3): Promise<ArticleMetadata[]> {
+export async function getRelatedArticles(
+  article: ArticleMetadata,
+  limit: number = 3
+): Promise<ArticleMetadata[]> {
   const server = await getServerFunctions()
   return server?.getRelatedArticles(article, limit) || []
 }
@@ -98,7 +107,13 @@ export async function getArticleStats(): Promise<{
   totalViews: number
 }> {
   const server = await getServerFunctions()
-  return server?.getArticleStats() || { totalArticles: 0, articlesByCategory: {}, totalViews: 0 }
+  return (
+    server?.getArticleStats() || {
+      totalArticles: 0,
+      articlesByCategory: {},
+      totalViews: 0,
+    }
+  )
 }
 
 /**
@@ -112,7 +127,9 @@ export async function articleExists(slug: string): Promise<boolean> {
 /**
  * 最新記事を取得
  */
-export async function getLatestArticles(limit: number = 5): Promise<ArticleMetadata[]> {
+export async function getLatestArticles(
+  limit: number = 5
+): Promise<ArticleMetadata[]> {
   const server = await getServerFunctions()
   return server?.getLatestArticles(limit) || []
 }
@@ -120,7 +137,9 @@ export async function getLatestArticles(limit: number = 5): Promise<ArticleMetad
 /**
  * 人気記事を取得（閲覧数順）
  */
-export async function getPopularArticles(limit: number = 5): Promise<ArticleMetadata[]> {
+export async function getPopularArticles(
+  limit: number = 5
+): Promise<ArticleMetadata[]> {
   const server = await getServerFunctions()
   return server?.getPopularArticles(limit) || []
 }
@@ -136,11 +155,13 @@ export async function getPremiumArticles(): Promise<ArticleMetadata[]> {
 /**
  * カテゴリー一覧を取得
  */
-export async function getCategories(): Promise<Array<{
-  name: string
-  slug: string
-  count: number
-}>> {
+export async function getCategories(): Promise<
+  Array<{
+    name: string
+    slug: string
+    count: number
+  }>
+> {
   const server = await getServerFunctions()
   return server?.getCategories() || []
 }
