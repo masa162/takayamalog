@@ -230,7 +230,16 @@ export async function getArticles(
     order?: 'asc' | 'desc'
   } = {}
 ): Promise<{ data: DatabaseArticle[]; count: number }> {
-  const supabase = await createClient()
+  console.log('getArticles called with options:', options)
+
+  let supabase
+  try {
+    supabase = await createClient()
+    console.log('Supabase client created successfully')
+  } catch (error) {
+    console.error('Failed to create Supabase client:', error)
+    throw error
+  }
 
   let query = supabase.from('articles').select(
     `
@@ -280,9 +289,12 @@ export async function getArticles(
     )
   }
 
+  console.log('Executing query...')
   const { data, error, count } = await query
+  console.log('Query result:', { data: data?.length, error, count })
 
   if (error) {
+    console.error('Database query error:', error)
     throw new Error(`記事一覧取得エラー: ${error.message}`)
   }
 

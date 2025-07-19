@@ -291,15 +291,14 @@ export default async function Home() {
     )
   } catch (error) {
     console.error('データ読み込みエラー:', error)
-
-    // デバッグ用: エラー詳細をブラウザのコンソールに表示
-    if (typeof window !== 'undefined') {
-      console.log('Supabase URL:', process.env.NEXT_PUBLIC_SUPABASE_URL)
-      console.log(
-        'Supabase Key exists:',
-        !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-      )
-    }
+    console.error('エラー詳細:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL ? '設定済み' : '未設定',
+      supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+        ? '設定済み'
+        : '未設定',
+    })
 
     return (
       <div className="min-h-screen" style={{ background: 'var(--background)' }}>
