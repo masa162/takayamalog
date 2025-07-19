@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import type { Article, ArticleMetadata } from '@/lib/articles'
+import type { Article } from '@/lib/articles'
 
 export interface DatabaseArticle {
   id: string
@@ -96,7 +96,7 @@ export async function updateArticle(id: string, input: Partial<ArticleInput>): P
   if (input.status === 'published' && !input.published_at) {
     updateData.published_at = new Date().toISOString()
   } else if (input.status === 'draft') {
-    updateData.published_at = null
+    updateData.published_at = undefined
   }
 
   const { data, error } = await supabase

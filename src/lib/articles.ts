@@ -13,6 +13,7 @@ export interface Article {
   tags: string[]
   author: string
   slug: string
+  rating?: number
 }
 
 export interface ArticleMetadata {

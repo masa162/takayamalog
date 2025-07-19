@@ -26,9 +26,6 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey, {
   auth: {
     autoRefreshToken: false,
     persistSession: false
-  },
-  global: {
-    fetch: (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
   }
 })
 
@@ -112,7 +109,7 @@ function getTypeOrder(articleType: string): number {
  * Markdownファイルからメタデータとコンテンツを読み取り
  */
 function parseMarkdownFile(filePath: string): {
-  frontmatter: any
+  frontmatter: Record<string, unknown>
   content: string
   slug: string
 } | null {
@@ -138,7 +135,7 @@ function parseMarkdownFile(filePath: string): {
  * 記事データをSupabaseフォーマットに変換
  */
 function convertToArticleInput(
-  frontmatter: any,
+  frontmatter: Record<string, unknown>,
   content: string,
   slug: string
 ): ArticleInput {
