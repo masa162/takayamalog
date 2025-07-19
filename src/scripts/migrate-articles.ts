@@ -140,7 +140,7 @@ function convertToArticleInput(
   slug: string
 ): ArticleInput {
   // カテゴリIDを取得
-  const categoryName = frontmatter.category || '業界研究'
+  const categoryName = (frontmatter.category as string) || '業界研究'
   const categoryInfo = categoryMapping[categoryName]
   
   if (!categoryInfo) {
@@ -150,26 +150,26 @@ function convertToArticleInput(
   // 公開日の処理
   let publishedAt: string | undefined
   if (frontmatter.publishedAt) {
-    publishedAt = new Date(frontmatter.publishedAt).toISOString()
+    publishedAt = new Date(frontmatter.publishedAt as string).toISOString()
   }
   
   return {
-    title: frontmatter.title || `無題記事 (${slug})`,
+    title: (frontmatter.title as string) || `無題記事 (${slug})`,
     slug: slug,
     content: content,
-    excerpt: frontmatter.excerpt || extractExcerpt(content),
+    excerpt: (frontmatter.excerpt as string) || extractExcerpt(content),
     category_id: categoryInfo.id,
-    tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
+    tags: Array.isArray(frontmatter.tags) ? frontmatter.tags as string[] : [],
     status: 'published',
     published_at: publishedAt,
-    meta_title: frontmatter.metaTitle || frontmatter.title,
-    meta_description: frontmatter.metaDescription || frontmatter.excerpt,
-    og_image_url: frontmatter.thumbnail || frontmatter.ogImage,
+    meta_title: (frontmatter.metaTitle as string) || (frontmatter.title as string),
+    meta_description: (frontmatter.metaDescription as string) || (frontmatter.excerpt as string),
+    og_image_url: (frontmatter.thumbnail as string) || (frontmatter.ogImage as string),
     article_type: categoryInfo.article_type,
-    rating: frontmatter.rating ? parseFloat(frontmatter.rating) : undefined,
-    research_method: frontmatter.researchMethod,
-    research_period: frontmatter.researchPeriod,
-    research_budget: frontmatter.researchBudget ? parseInt(frontmatter.researchBudget) : undefined
+    rating: frontmatter.rating ? parseFloat(frontmatter.rating as string) : undefined,
+    research_method: frontmatter.researchMethod as string,
+    research_period: frontmatter.researchPeriod as string,
+    research_budget: frontmatter.researchBudget ? parseInt(frontmatter.researchBudget as string) : undefined
   }
 }
 
