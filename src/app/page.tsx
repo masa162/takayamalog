@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import ArticleCard from '@/components/ui/ArticleCard'
-import SidebarServer from '@/components/ui/Sidebar.server'
+import SidebarStatic from '@/components/ui/Sidebar.static'
 import { getLatestArticles, getPopularArticles } from '@/lib/articles-server'
 
 export default async function Home() {
@@ -279,7 +279,7 @@ export default async function Home() {
 
           {/* サイドバーエリア（約30%幅） */}
           <div className="lg:col-span-1">
-            <SidebarServer />
+            <SidebarStatic />
           </div>
         </div>
       </div>
