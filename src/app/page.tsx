@@ -34,14 +34,21 @@ export default async function Home() {
       categoriesCount: categories.length,
     })
 
-    // ブラウザコンソールにも強制表示
-    if (typeof window !== 'undefined') {
-      console.log('✅ Browser: Data loaded successfully')
-    }
+    // クライアントサイドログ（ブラウザで確実に見える）
+    const clientLog = `✅ Data loaded: ${latestArticles.length} latest, ${popularArticles.length} popular, ${categories.length} categories`
+    console.log(clientLog)
 
     return (
       <div className="min-h-screen" style={{ background: 'var(--background)' }}>
         <div className="container mx-auto px-4 py-8">
+          {/* デバッグ情報 */}
+          <div className="text-center mb-4 p-4 bg-blue-100 text-blue-800 rounded">
+            <p>
+              Debug: {latestArticles.length} latest, {popularArticles.length}{' '}
+              popular, {categories.length} categories
+            </p>
+          </div>
+
           {/* ヒーロセクション */}
           <div className="text-center mb-12">
             <h1
