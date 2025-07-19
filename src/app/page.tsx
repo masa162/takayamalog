@@ -10,6 +10,9 @@ import {
 import { getCategoryStats } from '@/lib/database/categories'
 
 export default async function Home() {
+  // 必ずコンソールに表示されるログ
+  console.log('🚀 Home page loading started')
+
   try {
     const [latestArticlesData, popularArticlesData, stats, categories] =
       await Promise.all([
@@ -23,12 +26,18 @@ export default async function Home() {
     const latestArticles = latestArticlesData.map(convertToArticle)
     const popularArticles = popularArticlesData.map(convertToArticle)
 
-    console.log('Data loaded successfully:', {
+    // 成功時のログを強制的にコンソールに表示
+    console.log('✅ Data loaded successfully:', {
       latestCount: latestArticles.length,
       popularCount: popularArticles.length,
       stats,
       categoriesCount: categories.length,
     })
+
+    // ブラウザコンソールにも強制表示
+    if (typeof window !== 'undefined') {
+      console.log('✅ Browser: Data loaded successfully')
+    }
 
     return (
       <div className="min-h-screen" style={{ background: 'var(--background)' }}>
