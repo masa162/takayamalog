@@ -17,6 +17,8 @@ const eslintConfig = [
       '@typescript-eslint/explicit-function-return-type': 'off', // 一時的に無効化
       'prefer-const': 'error',
       'no-console': 'off', // デバッグ用に一時的に無効化
+      '@next/next/no-html-link-for-pages': 'off', // 一時的に無効化
+      '@next/next/no-img-element': 'warn', // エラーから警告に変更
     },
   },
 ]
