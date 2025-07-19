@@ -3,9 +3,16 @@ import type { NextRequest } from 'next/server'
 import { updateSession } from '@/lib/supabase/middleware'
 
 export async function middleware(request: NextRequest) {
-  // Update Supabase session
-  const supabaseResponse = await updateSession(request)
   const { pathname } = request.nextUrl
+  
+  // Supabase環境変数がない場合はSupabaseセッション更新をスキップ
+  let supabaseResponse
+  try {
+    supabaseResponse = await updateSession(request)
+  } catch (error) {
+    console.error('ミドルウェアエラー:', error)
+    supabaseResponse = NextResponse.next()
+  }
 
   // セキュリティヘッダーの設定
   const response = NextResponse.next()
