@@ -31,8 +31,8 @@ jobs:
       - name: Check formatting
         run: npm run format:check
 
-      - name: Deploy to Vercel
-        if: github.ref == 'refs/heads/main'
+      - name: Deploy to Vercel (Temporarily Disabled)
+        if: false  # Temporarily disabled until secrets are configured
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
