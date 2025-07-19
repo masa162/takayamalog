@@ -295,6 +295,14 @@ export async function getArticles(
 
   if (error) {
     console.error('Database query error:', error)
+    // テーブルが存在しない場合は空のデータを返す
+    if (
+      error.message?.includes('relation') &&
+      error.message?.includes('does not exist')
+    ) {
+      console.warn('Database tables do not exist yet. Returning empty data.')
+      return { data: [], count: 0 }
+    }
     throw new Error(`記事一覧取得エラー: ${error.message}`)
   }
 
@@ -391,42 +399,58 @@ export async function getArticleStats(): Promise<{
   averageRating: number
   totalCategories: number
 }> {
-  const supabase = await createClient()
+  try {
+    const supabase = await createClient()
 
-  const [articlesResult, viewsResult, ratingResult, categoriesResult] =
-    await Promise.all([
-      supabase
-        .from('articles')
-        .select('id', { count: 'exact', head: true })
-        .eq('status', 'published'),
-      supabase.from('articles').select('view_count').eq('status', 'published'),
-      supabase
-        .from('articles')
-        .select('rating')
-        .eq('status', 'published')
-        .not('rating', 'is', null),
-      supabase.from('categories').select('id', { count: 'exact', head: true }),
-    ])
+    const [articlesResult, viewsResult, ratingResult, categoriesResult] =
+      await Promise.all([
+        supabase
+          .from('articles')
+          .select('id', { count: 'exact', head: true })
+          .eq('status', 'published'),
+        supabase
+          .from('articles')
+          .select('view_count')
+          .eq('status', 'published'),
+        supabase
+          .from('articles')
+          .select('rating')
+          .eq('status', 'published')
+          .not('rating', 'is', null),
+        supabase
+          .from('categories')
+          .select('id', { count: 'exact', head: true }),
+      ])
 
-  const totalArticles = articlesResult.count || 0
-  const totalViews =
-    viewsResult.data?.reduce(
-      (sum, article) => sum + (article.view_count || 0),
-      0
-    ) || 0
-  const averageRating = ratingResult.data?.length
-    ? ratingResult.data.reduce(
-        (sum, article) => sum + (article.rating || 0),
+    const totalArticles = articlesResult.count || 0
+    const totalViews =
+      viewsResult.data?.reduce(
+        (sum, article) => sum + (article.view_count || 0),
         0
-      ) / ratingResult.data.length
-    : 0
-  const totalCategories = categoriesResult.count || 0
+      ) || 0
+    const averageRating = ratingResult.data?.length
+      ? ratingResult.data.reduce(
+          (sum, article) => sum + (article.rating || 0),
+          0
+        ) / ratingResult.data.length
+      : 0
+    const totalCategories = categoriesResult.count || 0
 
-  return {
-    totalArticles,
-    totalViews,
-    averageRating: Math.round(averageRating * 10) / 10,
-    totalCategories,
+    return {
+      totalArticles,
+      totalViews,
+      averageRating: Math.round(averageRating * 10) / 10,
+      totalCategories,
+    }
+  } catch (error) {
+    console.error('Failed to get article stats:', error)
+    // データベースエラーの場合はデフォルト値を返す
+    return {
+      totalArticles: 0,
+      totalViews: 0,
+      averageRating: 0,
+      totalCategories: 0,
+    }
   }
 }
 

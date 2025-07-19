@@ -18,27 +18,73 @@ export interface DatabaseCategory {
  * 全カテゴリを取得（記事数付き）
  */
 export async function getCategories(): Promise<DatabaseCategory[]> {
-  const supabase = await createClient()
+  try {
+    const supabase = await createClient()
 
-  const { data, error } = await supabase
-    .from('categories')
-    .select(
+    const { data, error } = await supabase
+      .from('categories')
+      .select(
+        `
+        *,
+        article_count:articles(count)
       `
-      *,
-      article_count:articles(count)
-    `
-    )
-    .order('sort_order', { ascending: true })
+      )
+      .order('sort_order', { ascending: true })
 
-  if (error) {
-    console.error('カテゴリ取得エラー:', error)
+    if (error) {
+      console.error('カテゴリ取得エラー:', error)
+      // テーブルが存在しない場合はデフォルトカテゴリを返す
+      if (
+        error.message?.includes('relation') &&
+        error.message?.includes('does not exist')
+      ) {
+        console.warn(
+          'Categories table does not exist yet. Returning default categories.'
+        )
+        return [
+          {
+            id: '1',
+            name: '風俗体験談',
+            slug: 'fuzoku',
+            sort_order: 1,
+            article_type: 'fuzoku' as const,
+            color: '#EF4444',
+            created_at: new Date().toISOString(),
+            article_count: 0,
+          },
+          {
+            id: '2',
+            name: 'FANZA動画レビュー',
+            slug: 'fanza',
+            sort_order: 2,
+            article_type: 'fanza' as const,
+            color: '#3B82F6',
+            created_at: new Date().toISOString(),
+            article_count: 0,
+          },
+          {
+            id: '3',
+            name: '業界研究',
+            slug: 'research',
+            sort_order: 3,
+            article_type: 'research' as const,
+            color: '#10B981',
+            created_at: new Date().toISOString(),
+            article_count: 0,
+          },
+        ]
+      }
+      return []
+    }
+
+    return data.map(category => ({
+      ...category,
+      article_count: category.article_count?.[0]?.count || 0,
+    }))
+  } catch (error) {
+    console.error('Failed to get categories:', error)
     return []
   }
-
-  return data.map(category => ({
-    ...category,
-    article_count: category.article_count?.[0]?.count || 0,
-  }))
 }
 
 /**

@@ -23,6 +23,13 @@ export default async function Home() {
     const latestArticles = latestArticlesData.map(convertToArticle)
     const popularArticles = popularArticlesData.map(convertToArticle)
 
+    console.log('Data loaded successfully:', {
+      latestCount: latestArticles.length,
+      popularCount: popularArticles.length,
+      stats,
+      categoriesCount: categories.length,
+    })
+
     return (
       <div className="min-h-screen" style={{ background: 'var(--background)' }}>
         <div className="container mx-auto px-4 py-8">
