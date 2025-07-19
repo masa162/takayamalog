@@ -305,8 +305,19 @@ export default async function Home() {
             className="text-xl mb-8"
             style={{ color: 'var(--text-secondary)' }}
           >
-            データ読み込み中です...
+            システムを準備中です...
           </p>
+          <div
+            className="text-sm p-4 rounded-lg mb-8"
+            style={{
+              background: 'rgba(251, 191, 36, 0.1)',
+              border: '1px solid rgba(251, 191, 36, 0.2)',
+            }}
+          >
+            <p style={{ color: '#f59e0b' }}>
+              データベースの設定を確認中です。しばらくお待ちください。
+            </p>
+          </div>
         </div>
       </div>
     )
