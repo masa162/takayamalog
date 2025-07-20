@@ -263,6 +263,7 @@ Premium研究」
 
 test
 
+
 All checks have passed
 3 successful checks
 
@@ -275,7 +276,11 @@ Details
 Vercel - Deployment has completed
 Details
 
----
+
+
+
+***
+
 
 カテゴリをひとつ増やして記事を追加しました。
 ＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/content/articles/fanzavr/fanzavr001.md
@@ -284,6 +289,7 @@ Details
 
 category/research
 
+
 ＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-20 14.46.45.jpg
 TOPページの
 
@@ -291,9 +297,12 @@ TOPページの
 とカードレイアウトの部分と
 「FANZA_VRレビュー」を入れ替えるかたちで表示させようと思います
 
+
+
 キャッシュでしょうかね
 http://localhost:3001/category/fanzavr
 ローカル表示されません
+
 
 ＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-20 14.53.50.jpg
 
@@ -304,6 +313,95 @@ htmlページが用意できてないということでしょうか？
 ＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/content/articles/fanzavr/fanzavr001.md
 を作成しただけです
 
+
 OKばっちり表示されました。
 ありがとうございます。
 ではここまでの作業報告書の作成をお願いします
+
+
+
+「Skip to content
+Navigation Menu
+masa162
+takayamalog
+
+Type / to search
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+CI
+0720_1500 #41
+Jobs
+Run details
+Annotations
+1 error
+test
+failed now in 27s
+Search logs
+1s
+0s
+5s
+9s
+4s
+3s
+2s
+Run npm run format:check
+
+> takayamalog@0.1.0 format:check
+> prettier --check .
+
+Checking formatting...
+[warn] content/articles/fanzavr/fanzavr001.md
+[warn] docs/memo/0720memolog.md
+[warn] docs/作業報告書/作業報告書_夜遊び研究所_20250720.md
+[warn] src/app/page.tsx
+[warn] Code style issues found in 4 files. Run Prettier with --write to fix.
+Error: Process completed with exit code 1.
+0s
+0s
+0s
+0s
+0s
+0720_1500 · masa162/takayamalog@2b2c31e」
+
+pushを通すための根本的な解決方法を教えてほしいです
+
+
+＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/運用仕様書
+
+にワークフローの記載お願いします。
+
+そういうものなんですかね？
+CLI一行ですけど、
+ひと手間増えるのかーと思うと
+ちょい面倒ですよね。
+
+
+そもそもPrettierとは？
+
+  1. Gitフックの導入 (Pre-commit Hook):
+
+   2. エディタの自動フォーマット機能:
+
+ちがいがわかりません、どちらでもいいんでしょうね。
+私はほぼvscodeしか使わないから、
+   2. エディタの自動フォーマット機能:
+でいいんでしょうね。
+あと、だいたい一人での運用なので
+
+
+@/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-20 15.16.12.jpg
+
+ここですかね？みつからないな
+
+
+＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-20 15.19.22.jpg
+
+OK設定できました。
+これで次回からcommit、push通りますかね
