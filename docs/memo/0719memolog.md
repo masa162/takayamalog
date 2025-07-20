@@ -448,11 +448,9 @@ vercerl側
 設定できてないですかね？
 教えてほしいです、
 
-
 「/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-19 18.43.25.jpg」
 
 デプロイは走っているようですが、表示できないですね
-
 
 「/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-19 18.49.04.jpg」
 コンソールタブなにも表示でてないですね
@@ -481,136 +479,135 @@ Showing runs from all workflows
 58 workflow runs
 debug: Supabase接続とクエリ実行の詳細ログ追加
 CI #29: Commit 3af4b5e pushed by masa162
-main	
- 1 hour ago
- 57s
+main
+1 hour ago
+57s
 debug: Supabase接続とクエリ実行の詳細ログ追加
 Deploy to Vercel #29: Commit 3af4b5e pushed by masa162
-main	
- 1 hour ago
- 1m 3s
+main
+1 hour ago
+1m 3s
 debug: 本番Supabase接続問題の原因特定用ログ追加
 CI #28: Commit 0d53ce2 pushed by masa162
-main	
- 1 hour ago
- 57s
+main
+1 hour ago
+57s
 debug: 本番Supabase接続問題の原因特定用ログ追加
 Deploy to Vercel #28: Commit 0d53ce2 pushed by masa162
-main	
- 1 hour ago
- 58s
+main
+1 hour ago
+58s
 style: メモファイルのPrettierフォーマット修正
 CI #27: Commit eaf6706 pushed by masa162
-main	
- 1 hour ago
- 57s
+main
+1 hour ago
+57s
 style: メモファイルのPrettierフォーマット修正
 Deploy to Vercel #27: Commit eaf6706 pushed by masa162
-main	
- 1 hour ago
- 58s
+main
+1 hour ago
+58s
 rv
 Deploy to Vercel #26: Commit 05d9c90 pushed by masa162
-main	
- 1 hour ago
- 29s
+main
+1 hour ago
+29s
 rv
 CI #26: Commit 05d9c90 pushed by masa162
-main	
- 1 hour ago
- 31s
+main
+1 hour ago
+31s
 style: ミドルウェアファイルのPrettierフォーマット修正
 CI #25: Commit ea10808 pushed by masa162
-main	
- 1 hour ago
- 58s
+main
+1 hour ago
+58s
 style: ミドルウェアファイルのPrettierフォーマット修正
 Deploy to Vercel #25: Commit ea10808 pushed by masa162
-main	
- 1 hour ago
- 56s
+main
+1 hour ago
+56s
 fix: ミドルウェアのエラーハンドリング強化
 Deploy to Vercel #24: Commit 7aa732d pushed by masa162
-main	
- 1 hour ago
- 28s
+main
+1 hour ago
+28s
 fix: ミドルウェアのエラーハンドリング強化
 CI #24: Commit 7aa732d pushed by masa162
-main	
- 1 hour ago
- 29s
+main
+1 hour ago
+29s
 improve: データベースエラー時のメッセージを改善
 CI #23: Commit 612e097 pushed by masa162
-main	
- 1 hour ago
- 59s
+main
+1 hour ago
+59s
 improve: データベースエラー時のメッセージを改善
 Deploy to Vercel #23: Commit 612e097 pushed by masa162
-main	
- 1 hour ago
- 58s
+main
+1 hour ago
+58s
 style: Prettierフォーマット修正
 Deploy to Vercel #22: Commit 889f63d pushed by masa162
-main	
- 3 hours ago
- 54s
+main
+3 hours ago
+54s
 style: Prettierフォーマット修正
 CI #22: Commit 889f63d pushed by masa162
-main	
- 3 hours ago
- 54s
+main
+3 hours ago
+54s
 fix: deployワークフローにビルドステップを追加
 Deploy to Vercel #21: Commit 7f43d8d pushed by masa162
-main	
- 3 hours ago
- 33s
+main
+3 hours ago
+33s
 fix: deployワークフローにビルドステップを追加
 CI #21: Commit 7f43d8d pushed by masa162
-main	
- 3 hours ago
- 36s
+main
+3 hours ago
+36s
 rv
 CI #20: Commit ea69943 pushed by masa162
-main	
- 4 hours ago
- 31s
+main
+4 hours ago
+31s
 rv
 Deploy to Vercel #20: Commit ea69943 pushed by masa162
-main	
- 4 hours ago
- 33s
+main
+4 hours ago
+33s
 temp: Vercelデプロイを一時無効化
 CI #19: Commit 07aca32 pushed by masa162
-main	
- 4 hours ago
- 27s
+main
+4 hours ago
+27s
 temp: Vercelデプロイを一時無効化
 Deploy to Vercel #19: Commit 07aca32 pushed by masa162
-main	
- 4 hours ago
- 34s
+main
+4 hours ago
+34s
 fix: Vercelデプロイを確実なアクションに戻す
 Deploy to Vercel #18: Commit 6958c9b pushed by masa162
-main	
- 4 hours ago
- 29s
+main
+4 hours ago
+29s
 fix: Vercelデプロイを確実なアクションに戻す
 CI #18: Commit 6958c9b pushed by masa162
-main	
- 4 hours ago
- 56s
+main
+4 hours ago
+56s
 fix: Vercelトークンを環境変数として設定
 Deploy to Vercel #17: Commit 6c95de6 pushed by masa162
-main	
- 4 hours ago
- 39s
-    
+main
+4 hours ago
+39s
+
 Workflow runs · masa162/takayamalog」
 
 /Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-19 19.59.25.jpg
 
 表示でてないですね
-
 
 「Skip to content
 Navigation Menu
@@ -636,143 +633,141 @@ Showing runs from all workflows
 60 workflow runs
 fix: データベーステーブル未作成時のフォールバック処理追加
 CI #30: Commit 33e3119 pushed by masa162
-main	
- 1 minute ago
- 55s
+main
+1 minute ago
+55s
 fix: データベーステーブル未作成時のフォールバック処理追加
 Deploy to Vercel #30: Commit 33e3119 pushed by masa162
-main	
- 1 minute ago
- 54s
+main
+1 minute ago
+54s
 debug: Supabase接続とクエリ実行の詳細ログ追加
 CI #29: Commit 3af4b5e pushed by masa162
-main	
- 1 hour ago
- 57s
+main
+1 hour ago
+57s
 debug: Supabase接続とクエリ実行の詳細ログ追加
 Deploy to Vercel #29: Commit 3af4b5e pushed by masa162
-main	
- 1 hour ago
- 1m 3s
+main
+1 hour ago
+1m 3s
 debug: 本番Supabase接続問題の原因特定用ログ追加
 CI #28: Commit 0d53ce2 pushed by masa162
-main	
- 1 hour ago
- 57s
+main
+1 hour ago
+57s
 debug: 本番Supabase接続問題の原因特定用ログ追加
 Deploy to Vercel #28: Commit 0d53ce2 pushed by masa162
-main	
- 1 hour ago
- 58s
+main
+1 hour ago
+58s
 style: メモファイルのPrettierフォーマット修正
 CI #27: Commit eaf6706 pushed by masa162
-main	
- 1 hour ago
- 57s
+main
+1 hour ago
+57s
 style: メモファイルのPrettierフォーマット修正
 Deploy to Vercel #27: Commit eaf6706 pushed by masa162
-main	
- 1 hour ago
- 58s
+main
+1 hour ago
+58s
 rv
 Deploy to Vercel #26: Commit 05d9c90 pushed by masa162
-main	
- 1 hour ago
- 29s
+main
+1 hour ago
+29s
 rv
 CI #26: Commit 05d9c90 pushed by masa162
-main	
- 1 hour ago
- 31s
+main
+1 hour ago
+31s
 style: ミドルウェアファイルのPrettierフォーマット修正
 CI #25: Commit ea10808 pushed by masa162
-main	
- 1 hour ago
- 58s
+main
+1 hour ago
+58s
 style: ミドルウェアファイルのPrettierフォーマット修正
 Deploy to Vercel #25: Commit ea10808 pushed by masa162
-main	
- 1 hour ago
- 56s
+main
+1 hour ago
+56s
 fix: ミドルウェアのエラーハンドリング強化
 Deploy to Vercel #24: Commit 7aa732d pushed by masa162
-main	
- 1 hour ago
- 28s
+main
+1 hour ago
+28s
 fix: ミドルウェアのエラーハンドリング強化
 CI #24: Commit 7aa732d pushed by masa162
-main	
- 1 hour ago
- 29s
+main
+1 hour ago
+29s
 improve: データベースエラー時のメッセージを改善
 CI #23: Commit 612e097 pushed by masa162
-main	
- 1 hour ago
- 59s
+main
+1 hour ago
+59s
 improve: データベースエラー時のメッセージを改善
 Deploy to Vercel #23: Commit 612e097 pushed by masa162
-main	
- 1 hour ago
- 58s
+main
+1 hour ago
+58s
 style: Prettierフォーマット修正
 Deploy to Vercel #22: Commit 889f63d pushed by masa162
-main	
- 3 hours ago
- 54s
+main
+3 hours ago
+54s
 style: Prettierフォーマット修正
 CI #22: Commit 889f63d pushed by masa162
-main	
- 3 hours ago
- 54s
+main
+3 hours ago
+54s
 fix: deployワークフローにビルドステップを追加
 Deploy to Vercel #21: Commit 7f43d8d pushed by masa162
-main	
- 3 hours ago
- 33s
+main
+3 hours ago
+33s
 fix: deployワークフローにビルドステップを追加
 CI #21: Commit 7f43d8d pushed by masa162
-main	
- 3 hours ago
- 36s
+main
+3 hours ago
+36s
 rv
 CI #20: Commit ea69943 pushed by masa162
-main	
- 4 hours ago
- 31s
+main
+4 hours ago
+31s
 rv
 Deploy to Vercel #20: Commit ea69943 pushed by masa162
-main	
- 4 hours ago
- 33s
+main
+4 hours ago
+33s
 temp: Vercelデプロイを一時無効化
 CI #19: Commit 07aca32 pushed by masa162
-main	
- 4 hours ago
- 27s
+main
+4 hours ago
+27s
 temp: Vercelデプロイを一時無効化
 Deploy to Vercel #19: Commit 07aca32 pushed by masa162
-main	
- 4 hours ago
- 34s
+main
+4 hours ago
+34s
 fix: Vercelデプロイを確実なアクションに戻す
 Deploy to Vercel #18: Commit 6958c9b pushed by masa162
-main	
- 4 hours ago
- 29s
-    
+main
+4 hours ago
+29s
+
 Workflow runs · masa162/takayamalog」
 
 /Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-19 20.05.11.jpg
 
 変わらないですね。キャッシュですかね？
 
-
 「」
 
 /Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-19 20.13.50.jpg
 
 でないですね。なにか自分のオペレーションが間違ってるのでしょうか
-
 
 「Skip to content
 Navigation Menu
@@ -798,138 +793,135 @@ Showing runs from all workflows
 62 workflow runs
 debug: 強制コンソールログ追加
 Deploy to Vercel #31: Commit c8118b4 pushed by masa162
-main	
- 2 minutes ago
- 51s
+main
+2 minutes ago
+51s
 debug: 強制コンソールログ追加
 CI #31: Commit c8118b4 pushed by masa162
-main	
- 2 minutes ago
- 55s
+main
+2 minutes ago
+55s
 fix: データベーステーブル未作成時のフォールバック処理追加
 CI #30: Commit 33e3119 pushed by masa162
-main	
- 21 minutes ago
- 55s
+main
+21 minutes ago
+55s
 fix: データベーステーブル未作成時のフォールバック処理追加
 Deploy to Vercel #30: Commit 33e3119 pushed by masa162
-main	
- 21 minutes ago
- 54s
+main
+21 minutes ago
+54s
 debug: Supabase接続とクエリ実行の詳細ログ追加
 CI #29: Commit 3af4b5e pushed by masa162
-main	
- 1 hour ago
- 57s
+main
+1 hour ago
+57s
 debug: Supabase接続とクエリ実行の詳細ログ追加
 Deploy to Vercel #29: Commit 3af4b5e pushed by masa162
-main	
- 1 hour ago
- 1m 3s
+main
+1 hour ago
+1m 3s
 debug: 本番Supabase接続問題の原因特定用ログ追加
 CI #28: Commit 0d53ce2 pushed by masa162
-main	
- 1 hour ago
- 57s
+main
+1 hour ago
+57s
 debug: 本番Supabase接続問題の原因特定用ログ追加
 Deploy to Vercel #28: Commit 0d53ce2 pushed by masa162
-main	
- 1 hour ago
- 58s
+main
+1 hour ago
+58s
 style: メモファイルのPrettierフォーマット修正
 CI #27: Commit eaf6706 pushed by masa162
-main	
- 1 hour ago
- 57s
+main
+1 hour ago
+57s
 style: メモファイルのPrettierフォーマット修正
 Deploy to Vercel #27: Commit eaf6706 pushed by masa162
-main	
- 1 hour ago
- 58s
+main
+1 hour ago
+58s
 rv
 Deploy to Vercel #26: Commit 05d9c90 pushed by masa162
-main	
- 1 hour ago
- 29s
+main
+1 hour ago
+29s
 rv
 CI #26: Commit 05d9c90 pushed by masa162
-main	
- 1 hour ago
- 31s
+main
+1 hour ago
+31s
 style: ミドルウェアファイルのPrettierフォーマット修正
 CI #25: Commit ea10808 pushed by masa162
-main	
- 1 hour ago
- 58s
+main
+1 hour ago
+58s
 style: ミドルウェアファイルのPrettierフォーマット修正
 Deploy to Vercel #25: Commit ea10808 pushed by masa162
-main	
- 1 hour ago
- 56s
+main
+1 hour ago
+56s
 fix: ミドルウェアのエラーハンドリング強化
 Deploy to Vercel #24: Commit 7aa732d pushed by masa162
-main	
- 2 hours ago
- 28s
+main
+2 hours ago
+28s
 fix: ミドルウェアのエラーハンドリング強化
 CI #24: Commit 7aa732d pushed by masa162
-main	
- 2 hours ago
- 29s
+main
+2 hours ago
+29s
 improve: データベースエラー時のメッセージを改善
 CI #23: Commit 612e097 pushed by masa162
-main	
- 2 hours ago
- 59s
+main
+2 hours ago
+59s
 improve: データベースエラー時のメッセージを改善
 Deploy to Vercel #23: Commit 612e097 pushed by masa162
-main	
- 2 hours ago
- 58s
+main
+2 hours ago
+58s
 style: Prettierフォーマット修正
 Deploy to Vercel #22: Commit 889f63d pushed by masa162
-main	
- 4 hours ago
- 54s
+main
+4 hours ago
+54s
 style: Prettierフォーマット修正
 CI #22: Commit 889f63d pushed by masa162
-main	
- 4 hours ago
- 54s
+main
+4 hours ago
+54s
 fix: deployワークフローにビルドステップを追加
 Deploy to Vercel #21: Commit 7f43d8d pushed by masa162
-main	
- 4 hours ago
- 33s
+main
+4 hours ago
+33s
 fix: deployワークフローにビルドステップを追加
 CI #21: Commit 7f43d8d pushed by masa162
-main	
- 4 hours ago
- 36s
+main
+4 hours ago
+36s
 rv
 CI #20: Commit ea69943 pushed by masa162
-main	
- 4 hours ago
- 31s
+main
+4 hours ago
+31s
 rv
 Deploy to Vercel #20: Commit ea69943 pushed by masa162
-main	
- 4 hours ago
- 33s
+main
+4 hours ago
+33s
 temp: Vercelデプロイを一時無効化
 CI #19: Commit 07aca32 pushed by masa162
-main	
- 4 hours ago
- 27s
-    
+main
+4 hours ago
+27s
+
 Workflow runs · masa162/takayamalog」
 
 コンソール部分に何も出てないのが不思議ですね。
 読めてないんでしょうね
 /Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-19 20.24.33.jpg
-
-
-
 
 Supabase
 masa162's Org
@@ -940,13 +932,8 @@ takayamalog
 main
 Production
 
-
 Connect
 Feedback
-
-
-
-
 
 masa162
 
@@ -956,18 +943,13 @@ schema
 
 public
 
-
 New table
 Search tables
 Search tables...
 
-
-
-
 categories
 
 articles
-
 
 Delete 2 rows
 
@@ -984,36 +966,28 @@ Page
 1
 of 1
 
-
-
 100 rows
 5 records
-
 
 Refresh
 definition
 data
 takayamalog | masa162's Org | Supabase
 
-
 深追いしてもあまりうまくいかないパターンかなあと経験的に感じます、、
 根本的に見方を少しかえてみますか？
-
 
 A) 一旦Supabaseを使わない静的版サイトを作成
 これでいきましょう
 
-
-  2. 段階的にSupabase機能を追加 - 少しずつデータベース機能を復活
-にしましょうかね、せっかくsupabase設定したので、そこまで意地はないですけど、ちょっとした心理的なサンクコスト効果ってありますよね
+2. 段階的にSupabase機能を追加 - 少しずつデータベース機能を復活
+   にしましょうかね、せっかくsupabase設定したので、そこまで意地はないですけど、ちょっとした心理的なサンクコスト効果ってありますよね
 
 とくに締め切りがあるわけでもないのでゆっくり、一歩ずつやっていけばいいかなという心構えでもあります。
-
 
 /Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-19 20.50.13.jpg
 
 ありがとうございます、ひとまず表示されるとやはり安心感得られます。。
-
 
 ありがとうございます、また明日にしましょうかね、
 本日の作業報告書の作成をお願いします

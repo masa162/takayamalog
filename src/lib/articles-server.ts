@@ -145,9 +145,9 @@ export function getArticlesByCategory(categorySlug: string): ArticleMetadata[] {
   const allArticles = getAllArticleMetadata()
 
   const categorySlugToNameMap: Record<string, string> = {
-    'fuzoku': '風俗体験談',
-    'fanza': 'FANZA動画レビュー',
-    'research': '業界研究',
+    fuzoku: '風俗体験談',
+    fanza: 'FANZA動画レビュー',
+    research: '業界研究',
   }
 
   const categoryName = categorySlugToNameMap[categorySlug]

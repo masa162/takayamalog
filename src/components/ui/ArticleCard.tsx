@@ -1,10 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import {
-  CalendarIcon,
-  ClockIcon,
-  EyeIcon,
-} from '@heroicons/react/24/outline'
+import { CalendarIcon, ClockIcon, EyeIcon } from '@heroicons/react/24/outline'
 
 interface ArticleCardProps {
   title: string
@@ -19,15 +15,15 @@ interface ArticleCardProps {
 }
 
 const isValidUrl = (url: string | undefined): boolean => {
-  if (!url) return false;
+  if (!url) return false
   try {
-    new URL(url);
-    return true;
+    new URL(url)
+    return true
   } catch {
     // console.error("Invalid URL:", url, e);
-    return false;
+    return false
   }
-};
+}
 
 const ArticleCard: React.FC<ArticleCardProps> = ({
   title,
@@ -145,4 +141,3 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
 }
 
 export default ArticleCard
-

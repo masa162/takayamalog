@@ -7,10 +7,7 @@ import {
   EyeIcon,
   TagIcon,
 } from '@heroicons/react/24/outline'
-import {
-  getArticleBySlug,
-  getRelatedArticles,
-} from '@/lib/articles-server'
+import { getArticleBySlug, getRelatedArticles } from '@/lib/articles-server'
 import SidebarStatic from '@/components/ui/Sidebar.static'
 
 interface PageProps {
@@ -146,7 +143,10 @@ export default async function ArticlePage({
               </div>
 
               {/* 記事メタ情報 */}
-              <div className="p-8" style={{ borderTop: '1px solid var(--border)' }}>
+              <div
+                className="p-8"
+                style={{ borderTop: '1px solid var(--border)' }}
+              >
                 {/* 研究概要 */}
                 <div
                   className="rounded-lg p-4 mb-6"
