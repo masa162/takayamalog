@@ -13,26 +13,23 @@ thumbnail: https://mn86.tonkotsu.jp/img/takayamalog/fanzavr/Fanzavr001_001.jpg
 
 ![alt text](https://mn86.tonkotsu.jp/img/takayamalog/fanzavr/Fanzavr001_002.jpg)
 
-
 ![alt text](https://mn86.tonkotsu.jp/img/takayamalog/fanzavr/Fanzavr001_003.jpg)
-
 
 ## 作品基本情報
 
 テスト
 
 - **品番**: sivr00284
-- **タイトル**: 
-- **出演者**: 
-- **メーカー**: 
-- **発売日**: 
-- **収録時間**: 
-- **ジャンル**: 
+- **タイトル**:
+- **出演者**:
+- **メーカー**:
+- **発売日**:
+- **収録時間**:
+- **ジャンル**:
 
-## 
+##
 
 ### 基本スペック
-
 
 ### 演出・構成
 

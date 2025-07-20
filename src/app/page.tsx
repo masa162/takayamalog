@@ -77,7 +77,9 @@ export default async function Home() {
               </Link>
 
               <Link href="/category/fanzavr" className="research-card">
-                <div className="research-badge research mb-4">FANZA_VRレビュー</div>
+                <div className="research-badge research mb-4">
+                  FANZA_VRレビュー
+                </div>
                 <h3 className="research-heading text-lg">VR作品分析</h3>
                 <p className="research-text mb-4">
                   FANZAのVR作品の詳細レビューと評価を研究員が分析します。
