@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import type { Article } from '@/lib/articles'
+import { marked } from 'marked'
 
 export interface DatabaseArticle {
   id: string
@@ -462,7 +463,7 @@ export function convertToArticle(dbArticle: DatabaseArticle): Article {
     id: dbArticle.id,
     title: dbArticle.title,
     slug: dbArticle.slug,
-    content: dbArticle.content,
+    content: marked.parse(dbArticle.content) as string,
     excerpt: dbArticle.excerpt || '',
     category: dbArticle.categories?.name || 'その他',
     tags: dbArticle.tags,

@@ -116,36 +116,6 @@ export default function CategoryPageClient({
             </div>
           </div>
           <p className="text-lg opacity-90 mb-6">{category.description}</p>
-
-          {/* 研究統計 */}
-          <div className="grid grid-cols-3 gap-4">
-            <div className="bg-white bg-opacity-10 rounded-lg p-3 text-center">
-              <div className="text-xl font-bold">{filteredArticles.length}</div>
-              <div className="text-xs opacity-80">総研究報告</div>
-            </div>
-            <div className="bg-white bg-opacity-10 rounded-lg p-3 text-center">
-              <div className="text-xl font-bold">
-                {filteredArticles
-                  .reduce((sum, article) => sum + article.viewCount, 0)
-                  .toLocaleString()}
-              </div>
-              <div className="text-xs opacity-80">総閲覧数</div>
-            </div>
-            <div className="bg-white bg-opacity-10 rounded-lg p-3 text-center">
-              <div className="text-xl font-bold">
-                {filteredArticles.filter(article => article.isPremium).length}
-              </div>
-              <div className="text-xs opacity-80">Premium研究</div>
-            </div>
-          </div>
-        </div>
-
-        {/* 年齢確認警告 */}
-        <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-8">
-          <p className="text-red-800 text-sm">
-            ⚠️
-            このカテゴリーは18歳未満の方の閲覧を禁止しています。成人向けコンテンツが含まれています。
-          </p>
         </div>
 
         {/* 検索バー */}

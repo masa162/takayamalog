@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import {
   CalendarIcon,
   ClockIcon,
@@ -9,10 +10,8 @@ import {
 import {
   getArticleBySlug,
   getRelatedArticles,
-  convertToArticle,
-  incrementViewCount,
-} from '@/lib/database/articles'
-import SidebarServer from '@/components/ui/Sidebar.server'
+} from '@/lib/articles-server'
+import SidebarStatic from '@/components/ui/Sidebar.static'
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -29,15 +28,11 @@ export default async function ArticlePage({
     notFound()
   }
 
-  // 閲覧数をインクリメント（バックグラウンドで実行）
-  incrementViewCount(dbArticle.id).catch(console.error)
-
-  // DatabaseArticle を Article 形式に変換
-  const article = convertToArticle(dbArticle)
+  const article = dbArticle
 
   // 関連記事を取得
   const relatedDbArticles = await getRelatedArticles(dbArticle, 3)
-  const relatedArticles = relatedDbArticles.map(convertToArticle)
+  const relatedArticles = relatedDbArticles
 
   const getCategoryStyle = (category: string): React.CSSProperties => {
     switch (category) {
@@ -120,72 +115,6 @@ export default async function ArticlePage({
                 className="p-8"
                 style={{ borderBottom: '1px solid var(--border)' }}
               >
-                {/* 研究報告書ヘッダー */}
-                <div
-                  className="rounded-lg p-4 mb-6"
-                  style={{
-                    background: 'var(--surface-elevated)',
-                    border: '1px solid var(--border)',
-                  }}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span
-                      className="text-xs font-medium"
-                      style={{ color: 'var(--primary)' }}
-                    >
-                      夜遊び研究所
-                    </span>
-                    <span
-                      className="text-xs"
-                      style={{ color: 'var(--text-muted)' }}
-                    >
-                      研究報告書
-                    </span>
-                  </div>
-                  <div
-                    className="text-xs"
-                    style={{ color: 'var(--text-secondary)' }}
-                  >
-                    Report No. {article.slug.toUpperCase().replace(/-/g, '')} /{' '}
-                    {formatDate(article.publishedAt)
-                      .replace(/年|月|日/g, '')
-                      .replace(/\s/g, '')}
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between mb-4">
-                  <span
-                    className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"
-                    style={getCategoryStyle(article.category)}
-                  >
-                    {article.category}
-                  </span>
-                  <div className="flex items-center space-x-2">
-                    {article.isPremium && (
-                      <span
-                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"
-                        style={{
-                          background: 'rgba(251, 191, 36, 0.1)',
-                          color: '#f59e0b',
-                          border: '1px solid rgba(251, 191, 36, 0.2)',
-                        }}
-                      >
-                        Premium
-                      </span>
-                    )}
-                    <span
-                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"
-                      style={{
-                        background: 'rgba(34, 197, 94, 0.1)',
-                        color: '#22c55e',
-                        border: '1px solid rgba(34, 197, 94, 0.2)',
-                      }}
-                    >
-                      研究完了
-                    </span>
-                  </div>
-                </div>
-
                 <h1
                   className="text-3xl font-bold mb-4"
                   style={{ color: 'var(--text-primary)' }}
@@ -193,6 +122,31 @@ export default async function ArticlePage({
                   {article.title}
                 </h1>
 
+                {article.thumbnail && (
+                  <div className="relative w-full h-96 mb-6 rounded-lg overflow-hidden">
+                    <Image
+                      src={article.thumbnail}
+                      alt={article.title}
+                      layout="fill"
+                      objectFit="cover"
+                      priority
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* 記事本文 */}
+              <div className="p-8">
+                <div
+                  style={{
+                    color: 'var(--text-primary)',
+                  }}
+                  dangerouslySetInnerHTML={{ __html: article.content || '' }}
+                />
+              </div>
+
+              {/* 記事メタ情報 */}
+              <div className="p-8" style={{ borderTop: '1px solid var(--border)' }}>
                 {/* 研究概要 */}
                 <div
                   className="rounded-lg p-4 mb-6"
@@ -320,31 +274,6 @@ export default async function ArticlePage({
                     ))}
                   </div>
                 </div>
-              </div>
-
-              {/* 年齢確認警告 */}
-              <div
-                className="p-4"
-                style={{
-                  background: 'rgba(239, 68, 68, 0.1)',
-                  borderLeft: '4px solid var(--primary)',
-                }}
-              >
-                <p className="text-sm" style={{ color: 'var(--primary)' }}>
-                  ⚠️
-                  この記事は18歳未満の方の閲覧を禁止しています。成人向けコンテンツが含まれています。
-                </p>
-              </div>
-
-              {/* 記事本文 */}
-              <div className="p-8">
-                <div
-                  className="prose prose-lg max-w-none"
-                  style={{
-                    color: 'var(--text-primary)',
-                  }}
-                  dangerouslySetInnerHTML={{ __html: article.content || '' }}
-                />
               </div>
 
               {/* 記事フッター */}
@@ -551,7 +480,7 @@ export default async function ArticlePage({
 
           {/* サイドバーエリア（約30%幅） */}
           <div className="lg:col-span-1">
-            <SidebarServer />
+            <SidebarStatic />
           </div>
         </div>
       </div>

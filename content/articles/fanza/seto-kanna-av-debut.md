@@ -1,25 +1,28 @@
 ---
 title: '瀬戸環奈AVデビュー - SONE-614 新人NO.1STYLE 瀬戸環奈AVデビュー'
 excerpt: '元アイドルの瀬戸環奈がついにAVデビュー！S1専属としてスタートする注目の新人女優を詳しくレビューします。'
-category: 'FANZA動画'
+category: 'FANZA動画レビュー'
 publishedAt: '2025-07-19'
 readTime: '8分'
 viewCount: 0
 isPremium: false
 tags: ['AVデビュー', 'S1', '新人', '元アイドル', '瀬戸環奈']
 author: '高山まさあき'
-thumbnail: ''
+thumbnail: https://mn86.tonkotsu.jp/img/takayamalog/fanza/2025/07/kanna02.jpg
 ---
 
 # 瀬戸環奈AVデビュー - SONE-614 新人NO.1STYLE 瀬戸環奈AVデビュー
 
 ## 注目度MAX！元アイドルのAVデビュー
 
+テスト
+![alt text](https://mn86.tonkotsu.jp/img/takayamalog/fanza/2025/07/kanna01.jpg)
+
 ついにこの日がやってきました。元アイドルとして活動していた瀬戸環奈さんがS1専属女優としてAVデビューを果たしました。業界内でも大きな注目を集めているこの作品について、詳しくレビューしていきます。
 
 ## 作品基本情報
-
-- **品番**: SONE-614
+テスト
+- **品番**: SONE-614＿テスト
 - **タイトル**: 新人NO.1STYLE 瀬戸環奈AVデビュー
 - **出演者**: 瀬戸環奈
 - **メーカー**: S1 NO.1 STYLE

@@ -26,14 +26,6 @@ export default async function Home() {
   return (
     <div className="min-h-screen" style={{ background: 'var(--background)' }}>
       <div className="container mx-auto px-4 py-8">
-        {/* 静的版表示 */}
-        <div className="text-center mb-4 p-4 bg-green-100 text-green-800 rounded">
-          <p>
-            ✅ 静的版: {latestArticles.length} latest, {popularArticles.length}{' '}
-            popular, {categories.length} categories
-          </p>
-        </div>
-
         {/* ヒーロセクション */}
         <div className="text-center mb-12">
           <h1
@@ -48,16 +40,6 @@ export default async function Home() {
           >
             実体験に基づく信頼できる情報をお届けします
           </p>
-          <div
-            className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-8"
-            style={{
-              background: 'rgba(239, 68, 68, 0.1)',
-              color: 'var(--primary)',
-              border: '1px solid rgba(239, 68, 68, 0.2)',
-            }}
-          >
-            ⚠️ 18歳未満の方は閲覧できません
-          </div>
         </div>
 
         {/* メイン2カラムレイアウト */}

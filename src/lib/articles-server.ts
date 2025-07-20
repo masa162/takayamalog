@@ -14,23 +14,31 @@ marked.setOptions({
 })
 
 /**
- * 記事ファイルのパスを取得
+ * 記事ファイルのパスを再帰的に取得
  */
-function getArticleFilePaths(): string[] {
+function getArticleFilePaths(dir: string = articlesDirectory): string[] {
+  let files: string[] = []
   try {
-    const files = fs.readdirSync(articlesDirectory)
-    return files.filter(file => file.endsWith('.md'))
+    const entries = fs.readdirSync(dir, { withFileTypes: true })
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name)
+      if (entry.isDirectory()) {
+        files = files.concat(getArticleFilePaths(fullPath))
+      } else if (entry.isFile() && entry.name.endsWith('.md')) {
+        files.push(fullPath)
+      }
+    }
   } catch (error) {
-    console.error('記事ディレクトリの読み取りエラー:', error)
-    return []
+    console.error(`記事ディレクトリの読み取りエラー (${dir}):`, error)
   }
+  return files
 }
 
 /**
  * ファイル名からスラッグを生成
  */
 function getSlugFromFileName(fileName: string): string {
-  return fileName.replace(/\.md$/, '')
+  return path.basename(fileName, '.md')
 }
 
 /**
@@ -38,9 +46,10 @@ function getSlugFromFileName(fileName: string): string {
  */
 export function getArticleMetadata(slug: string): ArticleMetadata | null {
   try {
-    const fullPath = path.join(articlesDirectory, `${slug}.md`)
+    const filePaths = getArticleFilePaths()
+    const fullPath = filePaths.find(p => getSlugFromFileName(p) === slug)
 
-    if (!fs.existsSync(fullPath)) {
+    if (!fullPath || !fs.existsSync(fullPath)) {
       return null
     }
 
@@ -72,9 +81,10 @@ export function getArticleMetadata(slug: string): ArticleMetadata | null {
  */
 export function getArticleBySlug(slug: string): Article | null {
   try {
-    const fullPath = path.join(articlesDirectory, `${slug}.md`)
+    const filePaths = getArticleFilePaths()
+    const fullPath = filePaths.find(p => getSlugFromFileName(p) === slug)
 
-    if (!fs.existsSync(fullPath)) {
+    if (!fullPath || !fs.existsSync(fullPath)) {
       return null
     }
 
@@ -131,9 +141,22 @@ export function getAllArticleMetadata(): ArticleMetadata[] {
 /**
  * カテゴリー別の記事メタデータを取得
  */
-export function getArticlesByCategory(category: string): ArticleMetadata[] {
+export function getArticlesByCategory(categorySlug: string): ArticleMetadata[] {
   const allArticles = getAllArticleMetadata()
-  return allArticles.filter(article => article.category === category)
+
+  const categorySlugToNameMap: Record<string, string> = {
+    'fuzoku': '風俗体験談',
+    'fanza': 'FANZA動画レビュー',
+    'research': '業界研究',
+  }
+
+  const categoryName = categorySlugToNameMap[categorySlug]
+
+  if (!categoryName) {
+    return [] // スラッグが不明な場合は空を返す
+  }
+
+  return allArticles.filter(article => article.category === categoryName)
 }
 
 /**

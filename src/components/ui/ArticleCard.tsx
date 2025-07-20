@@ -1,19 +1,35 @@
 import Link from 'next/link'
-import { CalendarIcon, ClockIcon, EyeIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
+import {
+  CalendarIcon,
+  ClockIcon,
+  EyeIcon,
+} from '@heroicons/react/24/outline'
 
 interface ArticleCardProps {
   title: string
   excerpt: string
   category: string
   publishedAt: string
-  readTime?: string
-  viewCount?: number
+  readTime: string
+  viewCount: number
   thumbnail?: string
   href: string
   isPremium?: boolean
 }
 
-export default function ArticleCard({
+const isValidUrl = (url: string | undefined): boolean => {
+  if (!url) return false;
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    // console.error("Invalid URL:", url, e);
+    return false;
+  }
+};
+
+const ArticleCard: React.FC<ArticleCardProps> = ({
   title,
   excerpt,
   category,
@@ -22,16 +38,8 @@ export default function ArticleCard({
   viewCount,
   thumbnail,
   href,
-  isPremium = false,
-}: ArticleCardProps): React.JSX.Element {
-  const formatDate = (dateString: string): string => {
-    return new Date(dateString).toLocaleDateString('ja-JP', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    })
-  }
-
+  isPremium,
+}) => {
   const getCategoryStyle = (category: string): React.CSSProperties => {
     switch (category) {
       case '風俗体験談':
@@ -61,114 +69,80 @@ export default function ArticleCard({
     }
   }
 
+  const formatDate = (dateString: string): string => {
+    return new Date(dateString).toLocaleDateString('ja-JP', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+  }
+
   return (
-    <article
-      className="rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02]"
-      style={{
-        background: 'var(--surface)',
-        border: '1px solid var(--border)',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-      }}
+    <Link
+      href={href}
+      className="content-card hover:opacity-80 transition-opacity duration-300 overflow-hidden flex flex-col"
     >
-      <Link href={href}>
-        <div className="block">
-          {/* サムネイル */}
-          <div
-            className="relative h-48 overflow-hidden"
-            style={{ background: 'var(--surface-elevated)' }}
-          >
-            {thumbnail ? (
-              <img
-                src={thumbnail}
-                alt={title}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-              />
-            ) : (
-              <div
-                className="w-full h-full flex items-center justify-center"
-                style={{
-                  background:
-                    'linear-gradient(135deg, var(--border) 0%, var(--border-light) 100%)',
-                }}
-              >
-                <span
-                  className="text-sm"
-                  style={{ color: 'var(--text-muted)' }}
-                >
-                  No Image
-                </span>
-              </div>
-            )}
-
-            {/* プレミアムバッジ */}
-            {isPremium && (
-              <div
-                className="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-bold"
-                style={{
-                  background: 'linear-gradient(45deg, #fbbf24, #f59e0b)',
-                  color: 'white',
-                }}
-              >
-                Premium
-              </div>
-            )}
-
-            {/* カテゴリーバッジ */}
-            <div className="absolute bottom-3 left-3">
-              <span
-                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                style={getCategoryStyle(category)}
-              >
-                {category}
-              </span>
-            </div>
-          </div>
-
-          {/* コンテンツ */}
-          <div className="p-6">
-            <h3
-              className="text-xl font-semibold mb-3 line-clamp-2 transition-colors hover:opacity-80"
-              style={{ color: 'var(--text-primary)' }}
-            >
-              {title}
-            </h3>
-
-            <p
-              className="mb-4 line-clamp-3"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              {excerpt}
-            </p>
-
-            {/* メタ情報 */}
-            <div
-              className="flex items-center justify-between text-sm"
-              style={{ color: 'var(--text-muted)' }}
-            >
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center">
-                  <CalendarIcon className="h-4 w-4 mr-1" />
-                  <span>{formatDate(publishedAt)}</span>
-                </div>
-
-                {readTime && (
-                  <div className="flex items-center">
-                    <ClockIcon className="h-4 w-4 mr-1" />
-                    <span>{readTime}</span>
-                  </div>
-                )}
-              </div>
-
-              {viewCount && (
-                <div className="flex items-center">
-                  <EyeIcon className="h-4 w-4 mr-1" />
-                  <span>{viewCount.toLocaleString()}</span>
-                </div>
-              )}
-            </div>
-          </div>
+      {isValidUrl(thumbnail) && (
+        <div className="relative w-full h-48 mb-4">
+          <Image
+            src={thumbnail!}
+            alt={title}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-t-lg"
+          />
         </div>
-      </Link>
-    </article>
+      )}
+      <div className="p-6 flex flex-col flex-grow">
+        <div className="flex justify-between items-center mb-3">
+          <span
+            className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+            style={getCategoryStyle(category)}
+          >
+            {category}
+          </span>
+          {isPremium && (
+            <span
+              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+              style={{
+                background: 'rgba(251, 191, 36, 0.1)',
+                color: '#f59e0b',
+                border: '1px solid rgba(251, 191, 36, 0.2)',
+              }}
+            >
+              Premium
+            </span>
+          )}
+        </div>
+        <h3
+          className="text-lg font-semibold mb-2 line-clamp-2 flex-grow"
+          style={{ color: 'var(--text-primary)' }}
+        >
+          {title}
+        </h3>
+        <p
+          className="text-sm mb-3 line-clamp-3"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          {excerpt}
+        </p>
+        <div
+          className="flex items-center text-xs mt-auto pt-3 border-t"
+          style={{ color: 'var(--text-muted)', borderColor: 'var(--border)' }}
+        >
+          <CalendarIcon className="h-3 w-3 mr-1" />
+          <span>{formatDate(publishedAt)}</span>
+          <span className="mx-2">•</span>
+          <ClockIcon className="h-3 w-3 mr-1" />
+          <span>{readTime}</span>
+          <span className="mx-2">•</span>
+          <EyeIcon className="h-3 w-3 mr-1" />
+          <span>{viewCount.toLocaleString()}</span>
+        </div>
+      </div>
+    </Link>
   )
 }
+
+export default ArticleCard
+

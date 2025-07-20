@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import CategoryPageClient from '@/components/pages/CategoryPageClient'
 import { getArticlesByCategory } from '@/lib/articles-server'
+import SidebarStatic from '@/components/ui/Sidebar.static'
 
 interface CategoryInfo {
   slug: string
@@ -52,8 +53,21 @@ export default async function CategoryPage({
   }
 
   try {
-    const articles = await getArticlesByCategory(category.name)
-    return <CategoryPageClient category={category} initialArticles={articles} />
+    const articles = await getArticlesByCategory(category.slug)
+    return (
+      <div className="min-h-screen" style={{ background: 'var(--background)' }}>
+        <div className="container mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div className="lg:col-span-3">
+              <CategoryPageClient category={category} initialArticles={articles} />
+            </div>
+            <div className="lg:col-span-1">
+              <SidebarStatic />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   } catch (error) {
     console.error('記事データ読み込みエラー:', error)
 
