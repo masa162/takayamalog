@@ -148,6 +148,7 @@ export function getArticlesByCategory(categorySlug: string): ArticleMetadata[] {
     fuzoku: '風俗体験談',
     fanza: 'FANZA動画レビュー',
     research: '業界研究',
+    fanzavr: 'FANZA_VRレビュー',
   }
 
   const categoryName = categorySlugToNameMap[categorySlug]

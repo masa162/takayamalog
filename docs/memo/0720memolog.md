@@ -262,3 +262,58 @@ Premium研究」
 テスト
 
 test
+
+
+All checks have passed
+3 successful checks
+
+CI / test (push) Successful in 55s
+Details
+
+Deploy to Vercel / deploy (push) Successful in 51s
+Details
+
+Vercel - Deployment has completed
+Details
+
+
+
+
+***
+
+
+カテゴリをひとつ増やして記事を追加しました。
+＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/content/articles/fanzavr/fanzavr001.md
+
+「FANZA_VRレビュー」
+
+category/research
+
+
+＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-20 14.46.45.jpg
+TOPページの
+
+「業界研究　トレンド分析」
+とカードレイアウトの部分と
+「FANZA_VRレビュー」を入れ替えるかたちで表示させようと思います
+
+
+
+キャッシュでしょうかね
+http://localhost:3001/category/fanzavr
+ローカル表示されません
+
+
+＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-20 14.53.50.jpg
+
+404で表示されないというのは、
+htmlページが用意できてないということでしょうか？
+
+先ほど手動で
+＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/content/articles/fanzavr/fanzavr001.md
+を作成しただけです
+
+
+OKばっちり表示されました。
+ありがとうございます。
+ではここまでの作業報告書の作成をお願いします

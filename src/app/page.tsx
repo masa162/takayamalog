@@ -12,7 +12,7 @@ export default async function Home() {
   const categories = [
     { name: '風俗体験談', slug: 'fuzoku', count: 2 },
     { name: 'FANZA動画レビュー', slug: 'fanza', count: 2 },
-    { name: '業界研究', slug: 'research', count: 1 },
+    { name: 'FANZA_VRレビュー', slug: 'fanzavr', count: 1 },
   ]
 
   // 静的統計
@@ -20,7 +20,7 @@ export default async function Home() {
     totalArticles: 5,
     totalViews: 1250,
     averageRating: 4.2,
-    totalCategories: 3,
+    totalCategories: 4,
   }
 
   return (
@@ -76,14 +76,14 @@ export default async function Home() {
                 </div>
               </Link>
 
-              <Link href="/category/research" className="research-card">
-                <div className="research-badge research mb-4">業界研究</div>
-                <h3 className="research-heading text-lg">トレンド分析</h3>
+              <Link href="/category/fanzavr" className="research-card">
+                <div className="research-badge research mb-4">FANZA_VRレビュー</div>
+                <h3 className="research-heading text-lg">VR作品分析</h3>
                 <p className="research-text mb-4">
-                  業界の最新動向と市場分析を定期的にレポートします。
+                  FANZAのVR作品の詳細レビューと評価を研究員が分析します。
                 </p>
                 <div className="text-sm" style={{ color: 'var(--text-muted)' }}>
-                  {categories.find(c => c.slug === 'research')?.count || 0}{' '}
+                  {categories.find(c => c.slug === 'fanzavr')?.count || 0}{' '}
                   件の研究報告
                 </div>
               </Link>

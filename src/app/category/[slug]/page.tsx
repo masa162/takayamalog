@@ -36,6 +36,14 @@ const categories: Record<string, CategoryInfo> = {
     color: 'blue',
     icon: '📊',
   },
+  fanzavr: {
+    slug: 'fanzavr',
+    name: 'FANZA_VRレビュー',
+    description:
+      'FANZAのVR作品の詳細レビューと評価。没入感のある体験を分析します。',
+    color: 'orange',
+    icon: '👓',
+  },
 }
 
 interface PageProps {
