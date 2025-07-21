@@ -25,7 +25,6 @@ export async function generateStaticParams() {
   return params
 }
 
-// @ts-expect-error: Next.js App Router params type issue
 export default async function ArchiveMonthPage({
   params,
 }: { params: { year: string; month: string } }): Promise<React.JSX.Element> {
