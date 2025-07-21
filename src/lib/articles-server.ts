@@ -282,6 +282,7 @@ export function getCategories(): Array<{
     風俗体験談: 'fuzoku',
     FANZA動画: 'fanza',
     業界研究: 'research',
+    FANZA_VRレビュー: 'fanzavr',
   }
 
   return Object.entries(stats.articlesByCategory).map(([name, count]) => ({
@@ -289,4 +290,77 @@ export function getCategories(): Array<{
     slug: categoryMapping[name] || name.toLowerCase(),
     count,
   }))
+}
+
+/**
+ * アーカイブデータを取得（年、月ごとの記事数と記事メタデータ）
+ */
+export function getArchivedArticlesData(): Record<string, Record<string, ArticleMetadata[]>> {
+  const allArticles = getAllArticleMetadata()
+  const archives: Record<string, Record<string, ArticleMetadata[]>> = {}
+
+  allArticles.forEach(article => {
+    const publishedDate = new Date(article.publishedAt)
+    const year = publishedDate.getFullYear().toString()
+    const month = (publishedDate.getMonth() + 1).toString().padStart(2, '0')
+
+    if (!archives[year]) {
+      archives[year] = {}
+    }
+    if (!archives[year][month]) {
+      archives[year][month] = []
+    }
+    archives[year][month].push(article)
+  })
+
+  // 年と月を降順でソート
+  const sortedYears = Object.keys(archives).sort((a, b) => parseInt(b) - parseInt(a))
+  const sortedArchives: Record<string, Record<string, ArticleMetadata[]>> = {}
+
+  sortedYears.forEach(year => {
+    const sortedMonths = Object.keys(archives[year]).sort((a, b) => parseInt(b) - parseInt(a))
+    sortedArchives[year] = {}
+    sortedMonths.forEach(month => {
+      sortedArchives[year][month] = archives[year][month].sort(
+        (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+      )
+    })
+  })
+
+  return sortedArchives
+}
+
+/**
+ * 特定の年月の記事を取得
+ */
+export function getArticlesByYearAndMonth(year: string, month: string): ArticleMetadata[] {
+  const archives = getArchivedArticlesData()
+  return archives[year]?.[month] || []
+}
+
+/**
+ * すべてのタグとその出現回数を取得
+ */
+export function getAllTagsWithCounts(): Array<{ name: string; slug: string; count: number }> {
+  const allArticles = getAllArticleMetadata()
+  const tagCounts: Record<string, number> = {}
+
+  allArticles.forEach(article => {
+    article.tags.forEach(tag => {
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1
+    })
+  })
+
+  return Object.entries(tagCounts)
+    .map(([name, count]) => ({ name, slug: encodeURIComponent(name), count }))
+    .sort((a, b) => b.count - a.count) // カウントが多い順
+}
+
+/**
+ * 特定のタグに紐づく記事を取得
+ */
+export function getArticlesByTag(tagSlug: string): ArticleMetadata[] {
+  const allArticles = getAllArticleMetadata()
+  const decodedTag = decodeURIComponent(tagSlug);
+  return allArticles.filter(article => article.tags.includes(decodedTag))
 }

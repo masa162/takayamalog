@@ -4,11 +4,11 @@ import Image from 'next/image'
 import {
   CalendarIcon,
   ClockIcon,
-  EyeIcon,
   TagIcon,
 } from '@heroicons/react/24/outline'
 import { getArticleBySlug, getRelatedArticles } from '@/lib/articles-server'
 import SidebarStatic from '@/components/ui/Sidebar.static'
+import MobileSidebar from '@/components/ui/MobileSidebar'
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -164,7 +164,7 @@ export default async function ArticlePage({
                 </div>
 
                 {/* メタ情報 */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="text-center p-3 rounded-lg content-card">
                     <CalendarIcon
                       className="h-5 w-5 mx-auto mb-1"
@@ -181,42 +181,6 @@ export default async function ArticlePage({
                       style={{ color: 'var(--text-primary)' }}
                     >
                       {formatDate(article.publishedAt)}
-                    </div>
-                  </div>
-                  <div className="text-center p-3 rounded-lg content-card">
-                    <ClockIcon
-                      className="h-5 w-5 mx-auto mb-1"
-                      style={{ color: 'var(--secondary)' }}
-                    />
-                    <div
-                      className="text-xs"
-                      style={{ color: 'var(--text-muted)' }}
-                    >
-                      読了時間
-                    </div>
-                    <div
-                      className="text-sm font-medium"
-                      style={{ color: 'var(--text-primary)' }}
-                    >
-                      {article.readTime}
-                    </div>
-                  </div>
-                  <div className="text-center p-3 rounded-lg content-card">
-                    <EyeIcon
-                      className="h-5 w-5 mx-auto mb-1"
-                      style={{ color: 'var(--secondary)' }}
-                    />
-                    <div
-                      className="text-xs"
-                      style={{ color: 'var(--text-muted)' }}
-                    >
-                      閲覧数
-                    </div>
-                    <div
-                      className="text-sm font-medium"
-                      style={{ color: 'var(--text-primary)' }}
-                    >
-                      {article.viewCount.toLocaleString()}
                     </div>
                   </div>
                   <div className="text-center p-3 rounded-lg content-card">
@@ -363,64 +327,24 @@ export default async function ArticlePage({
                   </div>
                 </div>
 
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                  <div className="text-sm">
-                    <div
-                      className="rounded-lg p-3 mb-3"
-                      style={{
-                        background: 'rgba(251, 191, 36, 0.1)',
-                        border: '1px solid rgba(251, 191, 36, 0.2)',
-                      }}
-                    >
-                      <h4
-                        className="font-medium mb-1"
-                        style={{ color: '#f59e0b' }}
-                      >
-                        研究報告書についての注意事項
-                      </h4>
-                      <ul
-                        className="text-xs space-y-1"
-                        style={{ color: 'var(--text-secondary)' }}
-                      >
-                        <li>
-                          • 本報告書は研究員の実体験・分析に基づくものです
-                        </li>
-                        <li>
-                          •
-                          情報は研究時点のものであり、変更される可能性があります
-                        </li>
-                        <li>• 利用は自己責任でお願いします</li>
-                        <li>• 18歳未満の方は閲覧できません</li>
-                      </ul>
-                    </div>
-                    <p
-                      className="text-xs"
-                      style={{ color: 'var(--text-muted)' }}
-                    >
-                      研究番号: {article.slug.toUpperCase().replace(/-/g, '')} |
-                      発行: 夜遊び研究所 | 最終更新:{' '}
-                      {formatDate(article.publishedAt)}
-                    </p>
-                  </div>
-                  <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-                    <Link
-                      href="/articles"
-                      className="inline-flex items-center px-4 py-2 rounded-lg transition-colors text-center"
-                      style={{
-                        background: 'var(--primary)',
-                        color: 'white',
-                      }}
-                    >
-                      研究報告一覧
-                    </Link>
-                    <Link
-                      href="/"
-                      className="inline-flex items-center px-4 py-2 rounded-lg transition-colors text-center content-card"
-                      style={{ color: 'var(--text-primary)' }}
-                    >
-                      研究所トップ
-                    </Link>
-                  </div>
+                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                  <Link
+                    href="/articles"
+                    className="inline-flex items-center px-4 py-2 rounded-lg transition-colors text-center"
+                    style={{
+                      background: 'var(--primary)',
+                      color: 'white',
+                    }}
+                  >
+                    研究報告一覧
+                  </Link>
+                  <Link
+                    href="/"
+                    className="inline-flex items-center px-4 py-2 rounded-lg transition-colors text-center content-card"
+                    style={{ color: 'var(--text-primary)' }}
+                  >
+                    研究所トップ
+                  </Link>
                 </div>
               </div>
             </article>
@@ -479,8 +403,13 @@ export default async function ArticlePage({
           </div>
 
           {/* サイドバーエリア（約30%幅） */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 hidden lg:block">
             <SidebarStatic />
+          </div>
+          <div className="lg:hidden">
+            <MobileSidebar>
+              <SidebarStatic />
+            </MobileSidebar>
           </div>
         </div>
       </div>

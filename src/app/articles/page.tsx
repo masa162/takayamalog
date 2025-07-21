@@ -1,5 +1,8 @@
 import ArticlesPageClient from '@/components/pages/ArticlesPageClient'
 import { getAllArticleMetadata, getCategories } from '@/lib/articles-server'
+import SidebarStatic from '@/components/ui/Sidebar.static'
+import MobileSidebar from '@/components/ui/MobileSidebar'
+import Link from 'next/link'
 
 export default async function ArticlesPage(): Promise<React.JSX.Element> {
   try {
@@ -25,10 +28,50 @@ export default async function ArticlesPage(): Promise<React.JSX.Element> {
     ]
 
     return (
-      <ArticlesPageClient
-        initialArticles={allArticles}
-        categories={formattedCategories}
-      />
+      <div className="min-h-screen" style={{ background: 'var(--background)' }}>
+        <div className="container mx-auto px-4 py-8">
+          {/* パンくずリスト */}
+          <nav className="mb-8">
+            <ol
+              className="flex items-center space-x-2 text-sm"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              <li>
+                <Link
+                  href="/"
+                  className="hover:opacity-80"
+                  style={{ color: 'var(--primary)' }}
+                >
+                  ホーム
+                </Link>
+              </li>
+              <li>/</li>
+              <li style={{ color: 'var(--text-primary)' }}>記事一覧</li>
+            </ol>
+          </nav>
+
+          {/* メイン2カラムレイアウト */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* メインコンテンツエリア（約70%幅） */}
+            <div className="lg:col-span-3 space-y-8">
+              <ArticlesPageClient
+                initialArticles={allArticles}
+                categories={formattedCategories}
+              />
+            </div>
+
+            {/* サイドバーエリア（約30%幅） */}
+            <div className="lg:col-span-1 hidden lg:block">
+              <SidebarStatic />
+            </div>
+            <div className="lg:hidden">
+              <MobileSidebar>
+                <SidebarStatic />
+              </MobileSidebar>
+            </div>
+          </div>
+        </div>
+      </div>
     )
   } catch (error) {
     console.error('記事データ読み込みエラー:', error)

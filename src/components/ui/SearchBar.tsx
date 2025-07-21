@@ -72,7 +72,8 @@ export default function SearchBar({
 
       {/* 検索ボタン（モバイル用） */}
       <button
-        type="submit"
+        type="button"
+        onClick={handleSubmit}
         className="md:hidden absolute right-0 top-0 h-full px-4 bg-blue-600 text-white rounded-r-lg hover:bg-blue-700 transition-colors"
         aria-label="検索"
       >

@@ -70,9 +70,6 @@ export default function ArticlesPageClient({
           <p className="text-xl text-gray-600 mb-8">
             研究所の最新記事をお楽しみください
           </p>
-          <div className="inline-flex items-center px-4 py-2 bg-red-100 text-red-800 rounded-full text-sm font-medium mb-8">
-            ⚠️ 18歳未満の方は閲覧できません
-          </div>
         </div>
 
         {/* 検索・フィルターセクション */}

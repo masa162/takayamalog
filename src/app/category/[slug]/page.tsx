@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import CategoryPageClient from '@/components/pages/CategoryPageClient'
 import { getArticlesByCategory } from '@/lib/articles-server'
 import SidebarStatic from '@/components/ui/Sidebar.static'
+import MobileSidebar from '@/components/ui/MobileSidebar'
 
 interface CategoryInfo {
   slug: string
@@ -72,8 +73,13 @@ export default async function CategoryPage({
                 initialArticles={articles}
               />
             </div>
-            <div className="lg:col-span-1">
+            <div className="lg:col-span-1 hidden lg:block">
               <SidebarStatic />
+            </div>
+            <div className="lg:hidden">
+              <MobileSidebar>
+                <SidebarStatic />
+              </MobileSidebar>
             </div>
           </div>
         </div>

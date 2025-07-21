@@ -4,7 +4,8 @@ import {
   CalendarIcon,
   TagIcon,
 } from '@heroicons/react/24/outline'
-import { getLatestArticles } from '@/lib/articles-server'
+import { getLatestArticles, getArchivedArticlesData, getAllTagsWithCounts } from '@/lib/articles-server'
+import SidebarArchiveList from './SidebarArchiveList'
 
 interface SidebarProps {
   className?: string
@@ -15,52 +16,18 @@ export default async function SidebarStatic({
 }: SidebarProps): Promise<React.JSX.Element> {
   // 静的データを使用
   const recentPosts = await getLatestArticles(5)
+  const archivedData = getArchivedArticlesData()
+  const allTags = getAllTagsWithCounts()
 
   const categories = [
     { name: '風俗体験談', slug: 'fuzoku', count: 2 },
     { name: 'FANZA動画レビュー', slug: 'fanza', count: 2 },
     { name: '業界研究', slug: 'research', count: 1 },
-  ]
-
-  const archives = [
-    { month: '2025年7月', count: 12 },
-    { month: '2025年6月', count: 18 },
-    { month: '2025年5月', count: 15 },
-    { month: '2025年4月', count: 20 },
-    { month: '2025年3月', count: 16 },
+    { name: 'FANZA_VRレビュー', slug: 'fanzavr', count: 1 },
   ]
 
   return (
     <div className={`space-y-8 ${className}`}>
-      {/* 検索ボックス */}
-      <div className="content-card sticky top-4">
-        <h3
-          className="text-lg font-semibold mb-4"
-          style={{ color: 'var(--text-primary)' }}
-        >
-          研究内容を検索
-        </h3>
-        <form className="relative">
-          <input
-            type="text"
-            placeholder="キーワードを入力..."
-            className="w-full px-4 py-2 pr-10 rounded-lg transition-colors"
-            style={{
-              background: 'var(--surface)',
-              border: '1px solid var(--border)',
-              color: 'var(--text-primary)',
-            }}
-          />
-          <button
-            type="submit"
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 rounded hover:opacity-80"
-            style={{ color: 'var(--primary)' }}
-          >
-            <MagnifyingGlassIcon className="h-5 w-5" />
-          </button>
-        </form>
-      </div>
-
       {/* カテゴリ */}
       <div className="content-card">
         <h3
@@ -92,6 +59,44 @@ export default async function SidebarStatic({
               >
                 {category.count}
               </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* 記事アーカイブ */}
+        <div className="content-card">
+          <h3
+            className="text-lg font-semibold mb-4"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            記事アーカイブ
+          </h3>
+          <SidebarArchiveList archivedData={archivedData} />
+      </div>
+
+      {/* タグ一覧 */}
+      <div className="content-card">
+        <h3
+          className="text-lg font-semibold mb-4"
+          style={{ color: 'var(--text-primary)' }}
+        >
+          タグ一覧
+        </h3>
+        <div className="flex flex-wrap gap-2">
+          {allTags.map(tag => (
+            <Link
+              key={tag.name}
+              href={`/tags/${tag.slug}`}
+              className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-colors hover:opacity-80"
+              style={{
+                background: 'rgba(59, 130, 246, 0.1)',
+                color: '#3b82f6',
+                border: '1px solid rgba(59, 130, 246, 0.2)',
+              }}
+            >
+              <TagIcon className="h-3 w-3 mr-1" />
+              {tag.name} ({tag.count})
             </Link>
           ))}
         </div>
@@ -139,39 +144,6 @@ export default async function SidebarStatic({
                   {post.category}
                 </span>
               </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {/* アーカイブ */}
-      <div className="content-card">
-        <h3
-          className="text-lg font-semibold mb-4"
-          style={{ color: 'var(--text-primary)' }}
-        >
-          研究アーカイブ
-        </h3>
-        <div className="space-y-2">
-          {archives.map((archive, index) => (
-            <Link
-              key={index}
-              href={`/archive/${archive.month.replace(/年|月/g, '-').replace(/-$/, '')}`}
-              className="flex justify-between items-center p-2 rounded-lg hover:opacity-80 transition-colors"
-              style={{ background: 'var(--surface)' }}
-            >
-              <span
-                className="text-sm"
-                style={{ color: 'var(--text-primary)' }}
-              >
-                {archive.month}
-              </span>
-              <span
-                className="text-xs"
-                style={{ color: 'var(--text-secondary)' }}
-              >
-                ({archive.count})
-              </span>
             </Link>
           ))}
         </div>
@@ -233,6 +205,35 @@ export default async function SidebarStatic({
             </p>
           </div>
         </div>
+      </div>
+
+      {/* 検索ボックス */}
+      <div className="content-card sticky top-4">
+        <h3
+          className="text-lg font-semibold mb-4"
+          style={{ color: 'var(--text-primary)' }}
+        >
+          サイト内を検索
+        </h3>
+        <form className="relative">
+          <input
+            type="text"
+            placeholder="キーワードを入力..."
+            className="w-full px-4 py-2 pr-10 rounded-lg transition-colors"
+            style={{
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              color: 'var(--text-primary)',
+            }}
+          />
+          <button
+            type="submit"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 rounded hover:opacity-80"
+            style={{ color: 'var(--primary)' }}
+          >
+            <MagnifyingGlassIcon className="h-5 w-5" />
+          </button>
+        </form>
       </div>
     </div>
   )

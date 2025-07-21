@@ -1,4 +1,7 @@
-画像ID,ファイル名,ベースURL,ディレクトリパス,呼び出しURL,代替テキスト(alt),利用先,メモ,アップロード日
+画像ID,ファイル名,ベースURL,ディレクトリパス,呼び出しURL,代替テキスト(alt),利用先,メモ,アップロード日,,
 img_0001,kanna01.jpg,https://mn86.tonkotsu.jp/img/,takayamalog/fanza/2025/07/,=CONCATENATE(C2,D2,B2),瀬戸環奈のアイキャッチ画像,takayamalog.com/seto-kanna-av-debut,S1提供素材,2025-07-20
 img_0002,kanna02.jpg,https://mn86.tonkotsu.jp/img/,takayamalog/fanza/2025/07/,=CONCATENATE(C3,D3,B3),記事中で使用する瀬戸環奈の画像,takayamalog.com/seto-kanna-av-debut,S1提供素材,2025-07-20
 img_0003,kanna03.jpg,https://mn86.tonkotsu.jp/img/,takayamalog/fanza/2025/07/,=CONCATENATE(C4,D4,B4),記事中で使用する瀬戸環奈の画像2,takayamalog.com/seto-kanna-av-debut,S1提供素材,2025-07-20
+,Fanzavr001_001.jpg,,takayamalog/fanza/2025/07/,,,,,,,
+,Fanzavr001_002.jpg,,takayamalog/fanza/2025/07/,,,,,,,
+,Fanzavr001_003.jpg,,takayamalog/fanza/2025/07/,,,,,,,

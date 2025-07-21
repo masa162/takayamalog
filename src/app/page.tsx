@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import ArticleCard from '@/components/ui/ArticleCard'
 import SidebarStatic from '@/components/ui/Sidebar.static'
+import MobileSidebar from '@/components/ui/MobileSidebar'
 import { getLatestArticles, getPopularArticles } from '@/lib/articles-server'
 
 export default async function Home() {
@@ -46,6 +47,43 @@ export default async function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* メインコンテンツエリア（約70%幅） */}
           <div className="lg:col-span-3 space-y-12">
+            {/* 最新の記事 */}
+            {latestArticles.length > 0 && (
+              <div className="content-card-elevated">
+                <div className="flex justify-between items-center mb-6">
+                  <h2
+                    className="text-2xl font-bold"
+                    style={{ color: 'var(--text-primary)' }}
+                  >
+                    最新の記事
+                  </h2>
+                  <Link
+                    href="/articles"
+                    className="font-medium hover:underline"
+                    style={{ color: 'var(--primary)' }}
+                  >
+                    すべて見る →
+                  </Link>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {latestArticles.map(article => (
+                    <ArticleCard
+                      key={article.id}
+                      title={article.title}
+                      excerpt={article.excerpt}
+                      category={article.category}
+                      publishedAt={article.publishedAt}
+                      readTime={article.readTime}
+                      viewCount={article.viewCount}
+                      thumbnail={article.thumbnail}
+                      href={`/article/${article.slug}`}
+                      isPremium={article.isPremium}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* 研究分野紹介 */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               <Link href="/category/fuzoku" className="research-card">
@@ -90,43 +128,6 @@ export default async function Home() {
                 </div>
               </Link>
             </div>
-
-            {/* 最新の研究成果 */}
-            {latestArticles.length > 0 && (
-              <div className="content-card-elevated">
-                <div className="flex justify-between items-center mb-6">
-                  <h2
-                    className="text-2xl font-bold"
-                    style={{ color: 'var(--text-primary)' }}
-                  >
-                    最新の研究成果
-                  </h2>
-                  <Link
-                    href="/articles"
-                    className="font-medium hover:underline"
-                    style={{ color: 'var(--primary)' }}
-                  >
-                    すべて見る →
-                  </Link>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {latestArticles.map(article => (
-                    <ArticleCard
-                      key={article.id}
-                      title={article.title}
-                      excerpt={article.excerpt}
-                      category={article.category}
-                      publishedAt={article.publishedAt}
-                      readTime={article.readTime}
-                      viewCount={article.viewCount}
-                      thumbnail={article.thumbnail}
-                      href={`/article/${article.slug}`}
-                      isPremium={article.isPremium}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
 
             {/* 人気の研究報告 */}
             {popularArticles.length > 0 && (
@@ -262,8 +263,13 @@ export default async function Home() {
           </div>
 
           {/* サイドバーエリア（約30%幅） */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 hidden lg:block">
             <SidebarStatic />
+          </div>
+          <div className="lg:hidden">
+            <MobileSidebar>
+              <SidebarStatic />
+            </MobileSidebar>
           </div>
         </div>
       </div>
