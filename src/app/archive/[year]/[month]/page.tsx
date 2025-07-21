@@ -3,7 +3,10 @@ import Link from 'next/link'
 import ArticleCard from '@/components/ui/ArticleCard'
 import SidebarStatic from '@/components/ui/Sidebar.static'
 import MobileSidebar from '@/components/ui/MobileSidebar'
-import { getArchivedArticlesData, getArticlesByYearAndMonth } from '@/lib/articles-server'
+import {
+  getArchivedArticlesData,
+  getArticlesByYearAndMonth,
+} from '@/lib/articles-server'
 
 // type ArchivePageParams = {
 //   year: string;
@@ -25,7 +28,9 @@ export async function generateStaticParams() {
 
 export default async function ArchiveMonthPage({
   params,
-}: { params: { year: string; month: string } }): Promise<React.JSX.Element> {
+}: {
+  params: { year: string; month: string }
+}): Promise<React.JSX.Element> {
   const { year, month } = params
   const articles = getArticlesByYearAndMonth(year, month)
 
