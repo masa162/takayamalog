@@ -4,7 +4,11 @@ import {
   CalendarIcon,
   TagIcon,
 } from '@heroicons/react/24/outline'
-import { getLatestArticles, getArchivedArticlesData, getAllTagsWithCounts } from '@/lib/articles-server'
+import {
+  getLatestArticles,
+  getArchivedArticlesData,
+  getAllTagsWithCounts,
+} from '@/lib/articles-server'
 import SidebarArchiveList from './SidebarArchiveList'
 
 interface SidebarProps {
@@ -65,14 +69,14 @@ export default async function SidebarStatic({
       </div>
 
       {/* 記事アーカイブ */}
-        <div className="content-card">
-          <h3
-            className="text-lg font-semibold mb-4"
-            style={{ color: 'var(--text-primary)' }}
-          >
-            記事アーカイブ
-          </h3>
-          <SidebarArchiveList archivedData={archivedData} />
+      <div className="content-card">
+        <h3
+          className="text-lg font-semibold mb-4"
+          style={{ color: 'var(--text-primary)' }}
+        >
+          記事アーカイブ
+        </h3>
+        <SidebarArchiveList archivedData={archivedData} />
       </div>
 
       {/* タグ一覧 */}

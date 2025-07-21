@@ -6,13 +6,19 @@ import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import type { ArticleMetadata } from '@/lib/articles'
 
 interface ArchiveYearItemProps {
-  year: string;
-  monthsData: Record<string, ArticleMetadata[]>;
+  year: string
+  monthsData: Record<string, ArticleMetadata[]>
 }
 
-export default function ArchiveYearItem({ year, monthsData }: ArchiveYearItemProps): React.JSX.Element {
-  const [isYearOpen, setIsYearOpen] = useState(false);
-  const totalYearArticles = Object.values(monthsData).reduce((sum, articles) => sum + articles.length, 0);
+export default function ArchiveYearItem({
+  year,
+  monthsData,
+}: ArchiveYearItemProps): React.JSX.Element {
+  const [isYearOpen, setIsYearOpen] = useState(false)
+  const totalYearArticles = Object.values(monthsData).reduce(
+    (sum, articles) => sum + articles.length,
+    0
+  )
 
   return (
     <li>
@@ -33,13 +39,16 @@ export default function ArchiveYearItem({ year, monthsData }: ArchiveYearItemPro
       {isYearOpen && (
         <ul className="ml-6 mt-2 space-y-2">
           {Object.keys(monthsData).map(month => {
-            const totalMonthArticles = monthsData[month].length;
+            const totalMonthArticles = monthsData[month].length
             return (
               <li key={month}>
                 <Link
                   href={`/archive/${year}/${month}`}
                   className="flex items-center justify-between w-full p-2 rounded-lg transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
-                  style={{ color: 'var(--text-secondary)', background: 'var(--surface)' }}
+                  style={{
+                    color: 'var(--text-secondary)',
+                    background: 'var(--surface)',
+                  }}
                 >
                   <span>
                     {parseInt(month)}月 ({totalMonthArticles}件)
@@ -47,10 +56,10 @@ export default function ArchiveYearItem({ year, monthsData }: ArchiveYearItemPro
                   <ChevronRightIcon className="h-4 w-4" />
                 </Link>
               </li>
-            );
+            )
           })}
         </ul>
       )}
     </li>
-  );
+  )
 }

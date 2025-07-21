@@ -295,7 +295,10 @@ export function getCategories(): Array<{
 /**
  * アーカイブデータを取得（年、月ごとの記事数と記事メタデータ）
  */
-export function getArchivedArticlesData(): Record<string, Record<string, ArticleMetadata[]>> {
+export function getArchivedArticlesData(): Record<
+  string,
+  Record<string, ArticleMetadata[]>
+> {
   const allArticles = getAllArticleMetadata()
   const archives: Record<string, Record<string, ArticleMetadata[]>> = {}
 
@@ -314,15 +317,20 @@ export function getArchivedArticlesData(): Record<string, Record<string, Article
   })
 
   // 年と月を降順でソート
-  const sortedYears = Object.keys(archives).sort((a, b) => parseInt(b) - parseInt(a))
+  const sortedYears = Object.keys(archives).sort(
+    (a, b) => parseInt(b) - parseInt(a)
+  )
   const sortedArchives: Record<string, Record<string, ArticleMetadata[]>> = {}
 
   sortedYears.forEach(year => {
-    const sortedMonths = Object.keys(archives[year]).sort((a, b) => parseInt(b) - parseInt(a))
+    const sortedMonths = Object.keys(archives[year]).sort(
+      (a, b) => parseInt(b) - parseInt(a)
+    )
     sortedArchives[year] = {}
     sortedMonths.forEach(month => {
       sortedArchives[year][month] = archives[year][month].sort(
-        (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+        (a, b) =>
+          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
       )
     })
   })
@@ -333,7 +341,10 @@ export function getArchivedArticlesData(): Record<string, Record<string, Article
 /**
  * 特定の年月の記事を取得
  */
-export function getArticlesByYearAndMonth(year: string, month: string): ArticleMetadata[] {
+export function getArticlesByYearAndMonth(
+  year: string,
+  month: string
+): ArticleMetadata[] {
   const archives = getArchivedArticlesData()
   return archives[year]?.[month] || []
 }
@@ -341,7 +352,11 @@ export function getArticlesByYearAndMonth(year: string, month: string): ArticleM
 /**
  * すべてのタグとその出現回数を取得
  */
-export function getAllTagsWithCounts(): Array<{ name: string; slug: string; count: number }> {
+export function getAllTagsWithCounts(): Array<{
+  name: string
+  slug: string
+  count: number
+}> {
   const allArticles = getAllArticleMetadata()
   const tagCounts: Record<string, number> = {}
 
@@ -361,6 +376,6 @@ export function getAllTagsWithCounts(): Array<{ name: string; slug: string; coun
  */
 export function getArticlesByTag(tagSlug: string): ArticleMetadata[] {
   const allArticles = getAllArticleMetadata()
-  const decodedTag = decodeURIComponent(tagSlug);
+  const decodedTag = decodeURIComponent(tagSlug)
   return allArticles.filter(article => article.tags.includes(decodedTag))
 }

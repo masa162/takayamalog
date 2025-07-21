@@ -17,7 +17,6 @@ TOPページUI調整します。
 「最新の研究成果」
 →「最新の記事」に文言変更
 
-
 メイフィールド上部にある
 「店舗型風俗・デリヘル」
 「動画作品分析」
@@ -33,19 +32,17 @@ TOPページUI調整します。
 まだ機能が実装されていないでしょうか？
 調整お願いします
 
-
 静的生成 (SSG) でアーカイブページを作成
 にしましょう
 
 記事アーカイブ
 └2025（件数）
-    └７月（件数）
-        └記事A
-        └記事B
-    └6月（件数）
+└７月（件数）
+└記事A
+└記事B
+└6月（件数）
 └2024（件数）
 のようなかたちでトグル開閉でお願いします
-
 
 ＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-21 12.01.03.jpg
 
@@ -55,7 +52,6 @@ TOPページUI調整します。
 されますが、
 右サイドメニューの「記事アーカイブ」内に表示させてください
 
-
 ありがとうございます、
 右サイドメニュー内に表示できていることを確認できました。
 
@@ -64,8 +60,6 @@ http://localhost:3002/archive
 
 ＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-21 12.06.14.jpg
 ここでも右サイドメニューが表示されるように調整お願いします
-
-
 
 ありがとうございます、表示確認できました。
 各ページ内のUI調整をします。
@@ -81,6 +75,7 @@ http://localhost:3002/article/fanzavr001
     • 情報は研究時点のものであり、変更される可能性があります
     • 利用は自己責任でお願いします
     • 18歳未満の方は閲覧できません
+
 」
 を削除します。
 
@@ -92,7 +87,6 @@ http://localhost:3002/article/fanzavr001
 「閲覧数」
 
 を削除します。
-
 
 ありがとうございます、表示確認できました。
 つづいて右サイドメニューに
@@ -115,14 +109,12 @@ http://localhost:3002/article/fanzavr001
 CICDに乗せれば機能しますかね？
 それともslug的な準備が必要でしょうか？
 
-
 ありがとうございます、
 ＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-21 12.34.08.jpg
 
 ＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-21 12.34.16.jpg
 
 タグが英数だとOK、日本語だと404なるようですね。
-
 
 ありがとうございます、表示確認できました。
 サイト内検索の実装は現段階ではされていないようです。
@@ -140,7 +132,6 @@ CICDに乗せれば機能しますかね？
 普通のリロードのような状態になりますね。
 
 「」
-
 
 「研究内容を検索」
 を右サイドメニュー一番下の移動お願いします
@@ -160,13 +151,11 @@ CICDに乗せれば機能しますかね？
 「最新の研究報告」
 を「タグ一覧」の下に移動お願いします
 
-
 先ほどと同じような状態でしょうか
 
 記事アーカイブの項目が消えてしまいました
 
 ＠/Users/nakayamamasayuki/Documents/GitHub/takayamalog/docs/tem_img/screenshot 2025-07-21 13.09.59.jpg
-
 
 http://localhost:3002/articles
 記事一覧ページで右サイドメニューが表示するように調整お願いします

@@ -4,10 +4,12 @@ import { useState } from 'react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 interface MobileSidebarProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
-export default function MobileSidebar({ children }: MobileSidebarProps): React.JSX.Element {
+export default function MobileSidebar({
+  children,
+}: MobileSidebarProps): React.JSX.Element {
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleSidebar = (): void => {

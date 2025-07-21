@@ -1,11 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import {
-  CalendarIcon,
-  ClockIcon,
-  TagIcon,
-} from '@heroicons/react/24/outline'
+import { CalendarIcon, ClockIcon, TagIcon } from '@heroicons/react/24/outline'
 import { getArticleBySlug, getRelatedArticles } from '@/lib/articles-server'
 import SidebarStatic from '@/components/ui/Sidebar.static'
 import MobileSidebar from '@/components/ui/MobileSidebar'

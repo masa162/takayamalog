@@ -29,7 +29,11 @@ export default async function ArchivePage(): Promise<React.JSX.Element> {
               ) : (
                 <ul className="space-y-4">
                   {years.map(year => (
-                    <ArchiveYearItem key={year} year={year} monthsData={archivedData[year]} />
+                    <ArchiveYearItem
+                      key={year}
+                      year={year}
+                      monthsData={archivedData[year]}
+                    />
                   ))}
                 </ul>
               )}

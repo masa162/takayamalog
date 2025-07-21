@@ -14,7 +14,9 @@ export async function generateStaticParams() {
 
 export default async function TagPage({
   params,
-}: { params: { tag: string } }): Promise<React.JSX.Element> {
+}: {
+  params: { tag: string }
+}): Promise<React.JSX.Element> {
   const decodedTag = decodeURIComponent(params.tag)
   const articles = getArticlesByTag(params.tag)
 
