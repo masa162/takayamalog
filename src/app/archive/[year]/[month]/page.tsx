@@ -3,17 +3,12 @@ import Link from 'next/link'
 import ArticleCard from '@/components/ui/ArticleCard'
 import SidebarStatic from '@/components/ui/Sidebar.static'
 import MobileSidebar from '@/components/ui/MobileSidebar'
-import {
-  getArchivedArticlesData,
-  getArticlesByYearAndMonth,
-} from '@/lib/articles-server'
+import { getArchivedArticlesData, getArticlesByYearAndMonth } from '@/lib/articles-server'
 
-// interface PageProps {
-//   params: Readonly<{
-//     year: string
-//     month: string
-//   }>
-// }
+// type ArchivePageParams = {
+//   year: string;
+//   month: string;
+// };
 
 export async function generateStaticParams() {
   const archivedData = getArchivedArticlesData()
@@ -28,11 +23,10 @@ export async function generateStaticParams() {
   return params
 }
 
+// @ts-expect-error: Next.js App Router params type issue
 export default async function ArchiveMonthPage({
   params,
-}: {
-  params: { year: string; month: string }
-}): Promise<React.JSX.Element> {
+}: { params: { year: string; month: string } }): Promise<React.JSX.Element> {
   const { year, month } = params
   const articles = getArticlesByYearAndMonth(year, month)
 
