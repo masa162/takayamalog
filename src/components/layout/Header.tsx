@@ -3,7 +3,6 @@
 import Link from 'next/link'
 
 export default function Header(): React.JSX.Element {
-
   const navigation = [
     { name: '風俗体験談', href: '/fuzoku' },
     { name: 'FANZA動画', href: '/fanza' },

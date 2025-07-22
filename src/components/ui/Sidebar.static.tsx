@@ -1,6 +1,10 @@
 import Link from 'next/link'
 import { CalendarIcon, TagIcon } from '@heroicons/react/24/outline'
-import { getLatestArticles, getArchivedArticlesData, getAllTagsWithCounts, } from '@/lib/articles-server'
+import {
+  getLatestArticles,
+  getArchivedArticlesData,
+  getAllTagsWithCounts,
+} from '@/lib/articles-server'
 import SidebarArchiveList from './SidebarArchiveList'
 import ClientSearchBarWrapper from './ClientSearchBarWrapper'
 

@@ -97,7 +97,10 @@ export default async function Home() {
                   <p className="research-text mb-4">
                     実際の利用体験に基づいた詳細なレポートを提供します。
                   </p>
-                  <div className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                  <div
+                    className="text-sm"
+                    style={{ color: 'var(--text-muted)' }}
+                  >
                     {categories.find(c => c.slug === 'fuzoku')?.count || 0}{' '}
                     件の研究報告
                   </div>
@@ -111,7 +114,10 @@ export default async function Home() {
                   <p className="research-text mb-4">
                     新作動画の詳細レビューと評価を研究員が分析します。
                   </p>
-                  <div className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                  <div
+                    className="text-sm"
+                    style={{ color: 'var(--text-muted)' }}
+                  >
                     {categories.find(c => c.slug === 'fanza')?.count || 0}{' '}
                     件の研究報告
                   </div>
@@ -125,7 +131,10 @@ export default async function Home() {
                   <p className="research-text mb-4">
                     FANZAのVR作品の詳細レビューと評価を研究員が分析します。
                   </p>
-                  <div className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                  <div
+                    className="text-sm"
+                    style={{ color: 'var(--text-muted)' }}
+                  >
                     {categories.find(c => c.slug === 'fanzavr')?.count || 0}{' '}
                     件の研究報告
                   </div>
@@ -224,9 +233,12 @@ export default async function Home() {
                       style={{ color: 'var(--text-secondary)' }}
                     >
                       <li>
-                        • 総研究報告数: {stats.totalArticles.toLocaleString()} 件
+                        • 総研究報告数: {stats.totalArticles.toLocaleString()}{' '}
+                        件
                       </li>
-                      <li>• 総閲覧数: {stats.totalViews.toLocaleString()} 回</li>
+                      <li>
+                        • 総閲覧数: {stats.totalViews.toLocaleString()} 回
+                      </li>
                       <li>• 活動分野: {stats.totalCategories} 分野</li>
                       <li>• 更新頻度: 週2-3回</li>
                     </ul>

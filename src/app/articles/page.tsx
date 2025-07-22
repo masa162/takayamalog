@@ -4,7 +4,11 @@ import SidebarStatic from '@/components/ui/Sidebar.static'
 import MobileSidebar from '@/components/ui/MobileSidebar'
 import Link from 'next/link'
 
-export default async function ArticlesPage({ searchParams }: { searchParams: { q?: string } }): Promise<React.JSX.Element> {
+export default async function ArticlesPage({
+  searchParams,
+}: {
+  searchParams: { q?: string }
+}): Promise<React.JSX.Element> {
   try {
     const [allArticles, categoryData] = await Promise.all([
       getAllArticleMetadata(),
