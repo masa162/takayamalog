@@ -10,14 +10,16 @@ import type { ArticleMetadata } from '@/lib/articles'
 interface ArticlesPageClientProps {
   initialArticles: ArticleMetadata[]
   categories: Array<{ id: string; name: string; color: string; count: number }>
+  initialQuery?: string
 }
 
 export default function ArticlesPageClient({
   initialArticles,
   categories,
+  initialQuery = '',
 }: ArticlesPageClientProps): React.JSX.Element {
   const [selectedCategory, setSelectedCategory] = useState('all')
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState(initialQuery)
   const [currentPage, setCurrentPage] = useState(1)
 
   // 記事フィルタリング

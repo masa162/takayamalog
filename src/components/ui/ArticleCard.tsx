@@ -12,6 +12,7 @@ interface ArticleCardProps {
   thumbnail?: string
   href: string
   isPremium?: boolean
+  priority?: boolean
 }
 
 const isValidUrl = (url: string | undefined): boolean => {
@@ -35,6 +36,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
   thumbnail,
   href,
   isPremium,
+  priority = false,
 }) => {
   const getCategoryStyle = (category: string): React.CSSProperties => {
     switch (category) {
@@ -83,9 +85,11 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
           <Image
             src={thumbnail!}
             alt={title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{ objectFit: 'cover' }}
             className="rounded-t-lg"
+            priority={priority}
           />
         </div>
       )}

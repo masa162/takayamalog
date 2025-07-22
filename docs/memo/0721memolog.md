@@ -167,3 +167,35 @@ http://localhost:3002/articles
 
 「⚠️ 18歳未満の方は閲覧できません」
 の削除お願いします
+
+「
+All checks have passed
+3 successful checks
+
+CI / test (push) Successful in 50s
+Details
+
+Deploy to Vercel / deploy (push) Successful in 46s
+Details
+
+Vercel - Deployment has completed
+Details
+」
+
+OK通りました。
+
+
+gemini　CLIでは一チャットの上限とかありますか？
+次回は新たにteminalを開いてgeminiCLIを開き直したほうがいいのでしょうか？
+
+***
+
+きりがいいので終了も
+PC版でハンバーガーメニュー見えちゃってて使いにくいので次回ここから改善
+
+モバイルで見ると、ページの一番下にハンバーガーメニュー出ている。
+ページ最上部に移動する
+
+
+ありがとうございます、drabakaでterminalからclaudecode起動できました。
+あとは、「プロジェクト資料把握お願いします」で話とおりそうですね。

@@ -1,15 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 export default function Header(): React.JSX.Element {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const toggleMenu = (): void => {
-    setIsMenuOpen(!isMenuOpen)
-  }
 
   const navigation = [
     { name: '風俗体験談', href: '/fuzoku' },
@@ -72,46 +65,7 @@ export default function Header(): React.JSX.Element {
               </Link>
             ))}
           </nav>
-
-          {/* モバイルメニューボタン */}
-          <button
-            onClick={toggleMenu}
-            className="md:hidden p-2 rounded-lg transition-colors"
-            style={{ color: 'var(--text-secondary)' }}
-            aria-label="メニューを開く"
-          >
-            {isMenuOpen ? (
-              <XMarkIcon className="h-6 w-6" />
-            ) : (
-              <Bars3Icon className="h-6 w-6" />
-            )}
-          </button>
         </div>
-
-        {/* モバイルメニュー */}
-        {isMenuOpen && (
-          <div
-            className="md:hidden py-4"
-            style={{ borderTop: '1px solid var(--border)' }}
-          >
-            <nav className="flex flex-col space-y-4">
-              {navigation.map(item => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:opacity-80"
-                  style={{
-                    color: 'var(--text-secondary)',
-                    background: 'transparent',
-                  }}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        )}
       </div>
     </header>
   )

@@ -4,7 +4,7 @@ import SidebarStatic from '@/components/ui/Sidebar.static'
 import MobileSidebar from '@/components/ui/MobileSidebar'
 import Link from 'next/link'
 
-export default async function ArticlesPage(): Promise<React.JSX.Element> {
+export default async function ArticlesPage({ searchParams }: { searchParams: { q?: string } }): Promise<React.JSX.Element> {
   try {
     const [allArticles, categoryData] = await Promise.all([
       getAllArticleMetadata(),
@@ -57,6 +57,7 @@ export default async function ArticlesPage(): Promise<React.JSX.Element> {
               <ArticlesPageClient
                 initialArticles={allArticles}
                 categories={formattedCategories}
+                initialQuery={searchParams.q || ''}
               />
             </div>
 
